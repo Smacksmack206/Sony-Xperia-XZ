@@ -76,14 +76,14 @@
 		chmod 644 /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq
 		echo 2150400 > /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq		#Core 2 Maximum Frequency = 2016MHz			
 		chmod 444 /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq
-		echo 35 729600:30 940800:32 1113600:35 1248000:37 1401600 1632000:65 1708800:85 1824000:99 19968000:99 2150400:100 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/target_loads #Set overclock max frequency compatible target_loads
+		echo 74 729600:73 940800:64 1113600:80 1248000:61 1401600:69 1632000:64 1708800:74 1824000:69 19968000:67 2150400:72 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/target_loads #Set overclock max frequency compatible target_loads
 	elif test $maxfreq -eq 1824000; then
 		#Temporarily change permissions to governor files for the Big cluster to set the maximum frequency to 2150400MHz
 		echo No Big Cluster Overclocking detected. Applying appropriate values.
 		chmod 644 /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq
 		echo 2150400 > /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq		#Core 2 Maximum Frequency = 2150MHz			
 		chmod 444 /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq
-		echo 35 729600:30 940800:32 1113600:35 1248000:37 1401600 1632000:65 1708800:85 1824000:99 19968000:99 2150400:100 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/target_loads #Set normal max frequency target_loads
+		echo 35 729600:73 940800:64 1113600:80 1248000:61 1401600:69 1632000:64 1708800:74 1824000:69 19968000:67 2150400:72 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/target_loads #Set normal max frequency target_loads
 	fi
 
 	#Tweak interactive Governor
