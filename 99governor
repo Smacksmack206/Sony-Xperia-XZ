@@ -19,7 +19,7 @@
 	#Temporarily change permissions to governor files for the LITTLE cluster to enable Interactive governor
 	chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 	echo interactive > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-	chmod 444 /sys/devices/system/cpu/cp u0/cpufreq/scaling_governor
+	chmod 444 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 	#Temporarily change permissions to governor files for the LITTLE cluster to lower the minimum frequency to 307MHz if possible
 	chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
 	echo 307200 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq			#Core 0 Minimum Frequency = 307MHz			
