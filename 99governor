@@ -101,7 +101,7 @@
 	#Enable Input Boost for LITTLE cluster @0 for 40ms
 	echo Enabling Input Boost at 0 MHz for the LITTLE cluster
 	echo 1 > /sys/module/cpu_boost/parameters/input_boost_enabled
-	echo 0:0 1:0 2:30 3:30 4:0 5:0 > /sys/module/cpu_boost/parameters/input_boost_freq
+	echo 0:307200 1:307200 2:307200 3:307200 4:0 5:0 > /sys/module/cpu_boost/parameters/input_boost_freq
 	echo 0 > /sys/module/cpu_boost/parameters/boost_ms
 	echo 40 > /sys/module/cpu_boost/parameters/input_boost_ms
 	echo ----------------------------------------------------
