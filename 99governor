@@ -90,12 +90,6 @@
 	echo 20000 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/max_freq_hysteresis
 	echo 80000 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/boostpulse_duration
 
-	#Enable Input Boost for LITTLE cluster @0 for 40ms
-	echo Enabling Input Boost at 0 MHz for the LITTLE cluster
-	echo 1 > /sys/module/cpu_boost/parameters/input_boost_enabled
-	echo 0:0 1:0 2:0 3:0 4:0 5:0 > /sys/module/cpu_boost/parameters/input_boost_freq
-	echo 0 > /sys/module/cpu_boost/parameters/boost_ms
-	echo 40 > /sys/module/cpu_boost/parameters/input_boost_ms
 	echo ----------------------------------------------------
 	echo Settings Successfully Applied! You may now tweak them further in ElementalX Kernel Manager
 	echo ----------------------------------------------------
