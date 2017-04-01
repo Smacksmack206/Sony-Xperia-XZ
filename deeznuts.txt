@@ -16,7 +16,8 @@ echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/boostpulse_duration
 echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/io_is_busy
 if [ -e "/sys/devices/system/cpu/cpu0/cpufreq/interactive/enable_prediction" ]; then
     chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/enable_prediction
-    echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/enable_prediction    fi 
+    echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/enable_prediction    
+fi 
 sleep 0.5
 #Apply settings to Big cluster
 echo Applying settings to BIG Cluster
@@ -36,7 +37,8 @@ if test $maxfreq -eq 2150400; then
     chmod 444 /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq
     chmod 644 /sys/devices/system/cpu/cpu2/cpufreq/interactive/target_loads
     echo 65 729600:75 940800:80 1036800:99 1401600:97 1824000:98 2150400:100 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/target_loads 
-chmod 444 /sys/devices/system/cpu/cpu2/cpufreq/interactive/target_loads    fi
+chmod 444 /sys/devices/system/cpu/cpu2/cpufreq/interactive/target_loads    
+fi
 sleep 0.5
 #Tweak Interactive Governor
 chmod 644 /sys/devices/system/cpu/cpu2/cpufreq/interactive/*
@@ -94,7 +96,7 @@ echo westwood > /proc/sys/net/ipv4/tcp_congestion_control
 else
 	echo Westwood not avilable, using Cubic
 	echo cubic > /proc/sys/net/ipv4/tcp_congestion_control 
-fifi
+fi
 sleep 1
 echo ------------------------------------------------------------
 echo 'deeznuts' Successfully Applied!
