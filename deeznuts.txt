@@ -1,6 +1,6 @@
 #!/su/bin/sush
-#Author: Alcolawl
-#Settings By: Alcolawl & NYCHitman1 & Smacksmack206
+#Author: Smacksmack206
+#Settings By: Smacksmack206 & Asiier
 #Asynchronous Codename: Deeznuts
 #Build Status: Experimental
 #Version: 1.0
