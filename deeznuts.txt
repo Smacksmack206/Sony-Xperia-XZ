@@ -1,10 +1,21 @@
-﻿chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/*
+#!/su/bin/sush
+#Author: Alcolawl
+#Settings By: Alcolawl & NYCHitman1 & Smacksmack206
+#Asynchronous Codename: Deeznuts
+#Build Status: Experimental
+#Version: 1.0
+#Last Updated: 04/1/2017
+#Notes: Please give credit when using this in your work!
+#Big thanks to Alcolawl & NYCHitman1 & Asiier as this is Smacksmack206 attempting to port their genius into the Sony Xperia XZ for the 820 Chipset!
+(
+	sleep 90
+chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/*
 echo 220000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack
 echo 307200 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
 echo 140000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate
 echo 0 729600:155000 960000:165000 1228800:155000 1478400:100000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
 echo 155 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load
-echo 22000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
+echo 20000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
 echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/max_freq_hysteresis
 echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/ignore_hispeed_on_notif
 echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/boost
@@ -43,7 +54,7 @@ sleep 0.5
 #Tweak Interactive Governor
 chmod 644 /sys/devices/system/cpu/cpu2/cpufreq/interactive/*
 echo 140000 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/timer_slack
-echo 940800 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/hispeed_freq
+echo 729600 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/hispeed_freq
 echo 85000 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/timer_rate
 echo 32000 940800:205000 1248000:175000 1401600:80000 1632000:80000 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/above_hispeed_delay
 echo 400 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/go_hispeed_load
@@ -62,10 +73,10 @@ if [ -e "/sys/devices/system/cpu/cpu2/cpufreq/interactive/enable_prediction" ]; 
     echo 0 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/enable_prediction
 fi
 if [ -e "/sys/block/dm-0/bdi/read_ahead_kb" ]; then
-	echo 1024 > /sys/devices/virtual/block/dm-0/bdi/read_ahead_kb
+	echo 2048 > /sys/devices/virtual/block/dm-0/bdi/read_ahead_kb
 fi
 if [ -e "/sys/block/sda/bdi/read_ahead_kb" ]; then
-	echo 1024 > /sys/block/sda/bdi/read_ahead_kb
+	echo 2048 > /sys/block/sda/bdi/read_ahead_kb
 fi
 echo ·Memory Values
 echo 0 > /proc/sys/vm/swappiness
@@ -107,3 +118,4 @@ echo ------------------------------------------------------------
 echo "deeznuts"
 echo " Done, this will be automatically closed..."
 sleep 4
+)&
