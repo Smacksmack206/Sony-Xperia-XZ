@@ -1,15 +1,14 @@
 #!/su/bin/sush
-#Author: Smacksmack206
-#Settings By: Smacksmack206 & Asiier
-#Asynchronous Codename: Deeznuts
-#Build Status: Experimental
-#Version: 1.0
-#Last Updated: 04/1/2017
+#Author: Alcolawl
+#Settings By: Alcolawl & NYCHitman1 & Smacksmack206
+#Asynchronous Codename: DrunkSauce
+#Build Status: Stable
+#Version: 2.0
+#Last Updated: 03/13/2017
 #Notes: Please give credit when using this in your work!
-#Big thanks to Alcolawl & NYCHitman1 & Asiier as this is Smacksmack206 attempting to port their genius into the Sony Xperia XZ for the 820 Chipset!
+#Big thanks to Alcolawl & NYCHitman1 as this is Smacksmack206 attempting to port their genius into the Sony Xperia XZ for the 820 Chipset!
 (
-	sleep 90
-chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/*
+	chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/*
 echo 220000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack
 echo 307200 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
 echo 140000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate
@@ -117,5 +116,4 @@ echo    using EXKM or Kernel Adiutor
 echo ------------------------------------------------------------
 echo "deeznuts"
 echo " Done, this will be automatically closed..."
-sleep 4
-)&
+sleep
