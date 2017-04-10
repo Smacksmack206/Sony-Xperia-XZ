@@ -118,4 +118,4 @@ echo ------------------------------------------------------------
 echo "deeznuts"
 echo " Done, this will be automatically closed..."
 sleep 4
-)&
+)& 
