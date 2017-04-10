@@ -1,10 +1,10 @@
 #!/system/bin/sh
-#Author: smacksmack206
+
 #Settings By: Smacksmack206
 #Device: Xperia XZ
 #Codename: Deeznuts
 #Build Status: Stable
-#Last Updated: 10/04/2017
+#Last Updated: 4/10/2017
 #Notes: THIS IS THE BEST THUS FAR
 #TWEAKS_BEGIN
 echo ""
@@ -19,12 +19,12 @@ echo Applying 'Deeznuts'
 echo Advanced Kernel Settings
 echo ------------------------------------------------------------
 sleep 0.5
-echo Author: smacksmack206
+
 echo Settings By: smacksmack206
 echo "Device: Xperia XZ"
 echo Codename: 'Deeznuts'
 echo Build Status: STABLE
-echo Last Updated: 10/04/2017
+echo Last Updated: 4/10/2017
 echo 
 echo ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 sleep 0.3
