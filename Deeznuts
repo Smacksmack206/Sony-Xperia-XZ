@@ -250,7 +250,7 @@ echo GPU Tweaking
 echo powersave > /sys/devices/soc/b00000.qcom,kgsl-3d0/devfreq/b00000.qcom,kgsl-3d0/governor
 
 	
-fi
+
 sleep 1
 
 
