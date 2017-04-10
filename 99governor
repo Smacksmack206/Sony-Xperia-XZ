@@ -106,3 +106,14 @@ echo westwood > /proc/sys/net/ipv4/tcp_congestion_control
 else
 	echo Westwood not avilable, using Cubic
 	echo cubic > /proc/sys/net/ipv4/tcp_congestion_control 
+fi
+sleep 1
+echo ------------------------------------------------------------
+echo 'deeznuts' Successfully Applied!
+echo "deeznuts" > /data/system/current_profile
+ echo   You may now tweak them further 
+echo    using EXKM or Kernel Adiutor 
+echo ------------------------------------------------------------
+echo "deeznuts"
+echo " Done, this will be automatically closed..."
+sleep
