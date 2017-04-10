@@ -118,7 +118,7 @@ sleep 0.5
 chmod 644 /sys/devices/system/cpu/cpu2/cpufreq/interactive/*
 #Tweak Interactive Governor
 echo 160000 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/timer_slack
-echo 940800 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/hispeed_freq
+echo 307200 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/hispeed_freq
 echo 110000 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/timer_rate
 echo 35000 729600:145000 940800:205000 1248000:175000 1401600:80000 1632000:180000 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/above_hispeed_delay
 echo 400 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/go_hispeed_load
@@ -212,7 +212,7 @@ echo Tweaking other various Settings
 
 
 echo ·Memory Values
-echo 0 > /proc/sys/vm/swappiness
+echo 70 > /proc/sys/vm/swappiness
 echo 100 > /proc/sys/vm/vfs_cache_pressure
 echo 80 > /proc/sys/vm/dirty_ratio
 echo 50 > /proc/sys/vm/dirty_background_ratio
@@ -248,12 +248,8 @@ fi
 sleep 0.4
 echo GPU Tweaking
 echo powersave > /sys/devices/soc/b00000.qcom,kgsl-3d0/devfreq/b00000.qcom,kgsl-3d0/governor
-if grep -q 'ro.build.version.sdk=25' /system/build.prop; then
-	if grep -q 'ro.build.flavor=lineage_oneplus3-userdebug' /system/build.prop; then
-   		echo 401000000 > /sys/class/kgsl/kgsl-3d0/max_gpuclk
-	else
-    		echo 401000000 > /sys/class/kgsl/kgsl-3d0/max_gpuclk
-	fi
+
+	
 fi
 sleep 1
 
