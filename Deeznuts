@@ -55,27 +55,17 @@ echo interactive > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 chmod 444 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 #Grab Maximum Achievable Frequency for the LITTLE Cluster
 maxfreq=$(cat "/sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq")                
-if test $maxfreq -eq 1593600; then
+if test $maxfreq -eq 1728000; then
     #Temporarily change permissions to governor files for the Big cluster to set the maximum frequency to 1593MHz
     echo No LITTLE Cluster Overclocking detected. 
     echo Applying appropriate values.
     chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
-    echo 1593600 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq     #Core 0 Maximum Frequency = 1593MHz         
+    echo 172800 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq     #Core 0 Maximum Frequency = 1728MHz         
     chmod 444 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
     chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
     echo 71 480000:70 556800:77 652800:79 729600:83 844800:87 960000:92 1036800:99 1228800:100 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads 
     chmod 444 /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
-    -elif test $maxfreq -eq 1728000; then
-     #Temporarily change permissions to governor files for the Little cluster to set the maximum frequency to 1728MHz
-     echo LITTLE Cluster Overclocking detected. 
-     echo Applying appropriate values.
-     chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
-     echo 1728000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq     #Core 0 Maximum Frequency = 1728MHz         
-     chmod 444 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
-     chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
-     echo 71 480000:70 556800:77 729600:81 960000:87 1036800:99 1228800:100 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads 
-  chmod 444 /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
-fi
+
 
 
 chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/*
