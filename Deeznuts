@@ -75,7 +75,6 @@ if test $maxfreq -eq 1593600; then
      chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
      echo 71 480000:70 556800:77 729600:81 960000:87 1036800:99 1228800:100 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads 
   chmod 444 /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
- else
 fi
 
 
