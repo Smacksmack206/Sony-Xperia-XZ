@@ -46,6 +46,18 @@ if grep -q 'ro.build.version.sdk=23' /system/build.prop; then
 fi
 echo ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 sleep 0.3
+Echo Enabling Overclocking on Little Cluster
+chmod 0777 /sys/devices/system/cpu/cpu2/core_ctl/*
+echo "40" > /sys/devices/system/cpu/cpu2/core_ctl/busy_up_thres
+echo "35" > /sys/devices/system/cpu/cpu2/core_ctl/busy_down_thres
+echo 1 > /sys/devices/system/cpu/cpu2/core_ctl/min_cpus
+chmod 0644 /sys/devices/system/cpu/cpu2/core_ctl/*
+sleep 5
+chmod 0777 /sys/devices/system/cpu/cpu2/core_ctl/*
+echo "0" > /sys/devices/system/cpu/cpu2/core_ctl/busy_up_thres
+echo "0" > /sys/devices/system/cpu/cpu2/core_ctl/busy_down_thres
+echo 2 > /sys/devices/system/cpu/cpu2/core_ctl/min_cpus
+chmod 0644 /sys/devices/system/cpu/cpu2/core_ctl/*
 #Apply settings to LITTLE cluster
 echo Applying settings to LITTLE Cluster...
 sleep 0.5
