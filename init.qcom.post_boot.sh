@@ -2376,7 +2376,7 @@ echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/boost
 echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/fast_ramp_down
 echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/align_windows
 echo 1 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_migration_notif
-echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_sched_load
+echo 1 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_sched_load
 echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/boostpulse_duration
 echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/io_is_busy
 chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/enable_prediction
@@ -2393,9 +2393,9 @@ echo 65 307200:69 940800:80 1036800:2 1113600:1 1401600:84 1824000:86 2150400:85
 chmod 444 /sys/devices/system/cpu/cpu2/cpufreq/interactive/target_loads
 chmod 644 /sys/devices/system/cpu/cpu2/cpufreq/interactive/*
 #Tweak Interactive Governor
-echo 150000 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/timer_slack
-echo 1401600 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/hispeed_freq
-echo 60000 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/timer_rate
+echo 90000 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/timer_slack
+echo 1555200 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/hispeed_freq
+echo 90000 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/timer_rate
 echo 32000 940800:75000 1248000:60000 1401600:80000 1632000:80000 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/above_hispeed_delay
 echo 400 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/go_hispeed_load
 echo 9000 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/min_sample_time
@@ -2405,7 +2405,7 @@ echo 0 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/boost
 echo 1 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/fast_ramp_down
 echo 0 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/align_windows
 echo 1 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/use_migration_notif
-echo 0 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/use_sched_load
+echo 1 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/use_sched_load
 echo 0 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/boostpulse_duration
 echo 0 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/io_is_busy
 chmod 644 /sys/devices/system/cpu/cpu2/cpufreq/interactive/enable_prediction
