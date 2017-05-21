@@ -2434,14 +2434,6 @@ echo 410000 > /proc/sys/kernel/sched_freq_dec_notify
 echo 600000 > /proc/sys/kernel/sched_freq_inc_notify
 echo 0 > /proc/sys/kernel/sched_boost
 #Tweaks for other various Settings
-echo '0' > /proc/sys/vm/laptop_mode
-echo '60' > /proc/sys/vm/overcommit_ratio
-echo '70' > /proc/sys/vm/vfs_cache_pressure
-echo '20' > /proc/sys/vm/dirty_ratio
-echo '10' > /proc/sys/vm/dirty_background_ratio
-echo '2000' > /proc/sys/vm/dirty_expire_centisecs
-echo '3000' > /proc/sys/vm/dirty_writeback_centisecs
-echo 4096 > /proc/sys/vm/min_free_kbytes
 echo 1 > /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
 echo westwood > /proc/sys/net/ipv4/tcp_congestion_control
 chmod 666 /sys/module/snd_soc_wcd9xxx/parameters/impedance_detect_en
@@ -2453,13 +2445,14 @@ chmod 444 /sys/module/snd_soc_wcd9330/parameters/high_perf_mode
 chmod 666 /sys/module/snd_soc_wcd9335/parameters/sido_buck_svs_voltage
 echo 965 > /sys/module/snd_soc_wcd9335/parameters/sido_buck_svs_voltage
 chmod 444 /sys/module/snd_soc_wcd9335/parameters/sido_buck_svs_voltage
-echo 'fiops' > /sys/block/mmcblk0/queue/scheduler
-echo 'fiops' > /sys/block/mmcblk1/queue/scheduler
-echo '3' > /sys/block/mmcblk1/iosched/read_scale
+echo 'maple' > /sys/block/mmcblk0/queue/scheduler
+echo 'maple' > /sys/block/mmcblk1/queue/scheduler
 echo '128' > /proc/sys/kernel/random/write_wakeup_threshold
 echo '64' > /proc/sys/kernel/random/read_wakeup_threshold
 echo '2048' > /sys/block/mmcblk0/queue/read_ahead_kb
 echo '2048' > /sys/block/mmcblk1/queue/read_ahead_kb
 setprop ro.config.media_vol_steps 30
+content insert --uri content://settings/system --bind name:s:somc.call_recording --bind value:i:1
+content insert --uri content://settings/system --bind name:s:somc.call_recording_beeptones --bind value:i:0
 busybox run-parts /system/etc/init.d/
 
