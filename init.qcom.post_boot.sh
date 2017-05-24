@@ -135,20 +135,20 @@ function configure_memory_parameters() {
 case "$target" in
     "msm7201a_ffa" | "msm7201a_surf" | "msm7627_ffa" | "msm7627_6x" | "msm7627a"  | "msm7627_surf" | \
     "qsd8250_surf" | "qsd8250_ffa" | "msm7630_surf" | "msm7630_1x" | "msm7630_fusion" | "qsd8650a_st1x")
-        echo "ondemand" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-        echo 90 > /sys/devices/system/cpu/cpufreq/ondemand/up_threshold
+        echo "interactive" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+        echo 90 > /sys/devices/system/cpu/cpufreq/interactive/up_threshold
         ;;
 esac
 
 case "$target" in
     "msm7201a_ffa" | "msm7201a_surf")
-        echo 500000 > /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate
+        echo 500000 > /sys/devices/system/cpu/cpufreq/interactive/sampling_rate
         ;;
 esac
 
 case "$target" in
     "msm7630_surf" | "msm7630_1x" | "msm7630_fusion")
-        echo 75000 > /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate
+        echo 75000 > /sys/devices/system/cpu/cpufreq/interactive/sampling_rate
         echo 1 > /sys/module/pm2/parameters/idle_sleep_mode
         ;;
 esac
@@ -174,14 +174,14 @@ case "$target" in
      echo 1 > /sys/module/msm_pm/modes/cpu1/power_collapse/idle_enabled
      echo 1 > /sys/module/msm_pm/modes/cpu0/standalone_power_collapse/idle_enabled
      echo 1 > /sys/module/msm_pm/modes/cpu1/standalone_power_collapse/idle_enabled
-     echo "ondemand" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-     echo "ondemand" > /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor
-     echo 50000 > /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate
-     echo 90 > /sys/devices/system/cpu/cpufreq/ondemand/up_threshold
-     echo 1 > /sys/devices/system/cpu/cpufreq/ondemand/io_is_busy
-     echo 4 > /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor
-     echo 384000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
-     echo 384000 > /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq
+     echo "interactive" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+     echo "interactive" > /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor
+     echo 50000 > /sys/devices/system/cpu/cpufreq/interactive/sampling_rate
+     echo 90 > /sys/devices/system/cpu/cpufreq/interactive/up_threshold
+     echo 0 > /sys/devices/system/cpu/cpufreq/interactive/io_is_busy
+     echo 4 > /sys/devices/system/cpu/cpufreq/interactive/sampling_down_factor
+     echo 307200 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+     echo 307200 > /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq
      chown -h system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
      chown -h system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
      chown -h system /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq
@@ -217,27 +217,27 @@ case "$target" in
          echo 1 > /sys/devices/system/cpu/cpu1/online
          echo 1 > /sys/devices/system/cpu/cpu2/online
          echo 1 > /sys/devices/system/cpu/cpu3/online
-         echo "ondemand" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-         echo "ondemand" > /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor
-         echo "ondemand" > /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
-         echo "ondemand" > /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor
-         echo 50000 > /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate
-         echo 90 > /sys/devices/system/cpu/cpufreq/ondemand/up_threshold
-         echo 1 > /sys/devices/system/cpu/cpufreq/ondemand/io_is_busy
-         echo 4 > /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor
-         echo 10 > /sys/devices/system/cpu/cpufreq/ondemand/down_differential
-         echo 70 > /sys/devices/system/cpu/cpufreq/ondemand/up_threshold_multi_core
-         echo 3 > /sys/devices/system/cpu/cpufreq/ondemand/down_differential_multi_core
-         echo 918000 > /sys/devices/system/cpu/cpufreq/ondemand/optimal_freq
-         echo 1026000 > /sys/devices/system/cpu/cpufreq/ondemand/sync_freq
-         echo 80 > /sys/devices/system/cpu/cpufreq/ondemand/up_threshold_any_cpu_load
-         chown -h system /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate
-         chown -h system /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor
-         chown -h system /sys/devices/system/cpu/cpufreq/ondemand/io_is_busy
-         echo 384000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
-         echo 384000 > /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq
-         echo 384000 > /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq
-         echo 384000 > /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq
+         echo "interactive" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+         echo "interactive" > /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor
+         echo "interactive" > /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
+         echo "interactive" > /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor
+         echo 50000 > /sys/devices/system/cpu/cpufreq/interactive/sampling_rate
+         echo 90 > /sys/devices/system/cpu/cpufreq/interactive/up_threshold
+         echo 0 > /sys/devices/system/cpu/cpufreq/interactive/io_is_busy
+         echo 4 > /sys/devices/system/cpu/cpufreq/interactive/sampling_down_factor
+         echo 10 > /sys/devices/system/cpu/cpufreq/interactive/down_differential
+         echo 70 > /sys/devices/system/cpu/cpufreq/interactive/up_threshold_multi_core
+         echo 3 > /sys/devices/system/cpu/cpufreq/interactive/down_differential_multi_core
+         echo 307200 > /sys/devices/system/cpu/cpufreq/interactive/optimal_freq
+         echo 307200 > /sys/devices/system/cpu/cpufreq/interactive/sync_freq
+         echo 155 > /sys/devices/system/cpu/cpufreq/interactive/up_threshold_any_cpu_load
+         chown -h system /sys/devices/system/cpu/cpufreq/interactive/sampling_rate
+         chown -h system /sys/devices/system/cpu/cpufreq/interactive/sampling_down_factor
+         chown -h system /sys/devices/system/cpu/cpufreq/interactive/io_is_busy
+         echo 307200 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+         echo 307200 > /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq
+         echo 307200 > /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq
+         echo 307200 > /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq
          chown -h system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
          chown -h system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
          chown -h system /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq
@@ -390,41 +390,41 @@ case "$target" in
                 echo "interactive" > /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor
                 echo "interactive" > /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
                 echo "interactive" > /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor
-                echo "20000 1400000:40000 1700000:20000" > /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay
-                echo 90 > /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load
-                echo 1190400 > /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
-                echo 1 > /sys/devices/system/cpu/cpufreq/interactive/io_is_busy
-                echo "85 1500000:90 1800000:70" > /sys/devices/system/cpu/cpufreq/interactive/target_loads
-                echo 40000 > /sys/devices/system/cpu/cpufreq/interactive/min_sample_time
-                echo 20 > /sys/module/cpu_boost/parameters/boost_ms
-                echo 1728000 > /sys/module/cpu_boost/parameters/sync_threshold
+                echo "729600:175000 844800:95000 960000:185000 1228800:175000 1478400:120000" > /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay
+                echo 155 > /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load
+                echo 307200 > /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
+                echo 0 > /sys/devices/system/cpu/cpufreq/interactive/io_is_busy
+                echo "71 480000:70 556800:77 652800:79 729600:83 844800:87 960000:92 1036800:9 1228800:96" > /sys/devices/system/cpu/cpufreq/interactive/target_loads
+                echo 24000  > /sys/devices/system/cpu/cpufreq/interactive/min_sample_time
+                echo 0 > /sys/module/cpu_boost/parameters/boost_ms
+                echo 0 > /sys/module/cpu_boost/parameters/sync_threshold
                 echo 100000 > /sys/devices/system/cpu/cpufreq/interactive/sampling_down_factor
-                echo 1497600 > /sys/module/cpu_boost/parameters/input_boost_freq
-                echo 40 > /sys/module/cpu_boost/parameters/input_boost_ms
+                echo 0 > /sys/module/cpu_boost/parameters/input_boost_freq
+                echo 0 > /sys/module/cpu_boost/parameters/input_boost_ms
                 setprop ro.qualcomm.perf.cores_online 2
             ;;
             *)
-                echo "ondemand" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-                echo "ondemand" > /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor
-                echo "ondemand" > /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
-                echo "ondemand" > /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor
-                echo 50000 > /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate
-                echo 90 > /sys/devices/system/cpu/cpufreq/ondemand/up_threshold
-                echo 1 > /sys/devices/system/cpu/cpufreq/ondemand/io_is_busy
-                echo 2 > /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor
-                echo 10 > /sys/devices/system/cpu/cpufreq/ondemand/down_differential
-                echo 70 > /sys/devices/system/cpu/cpufreq/ondemand/up_threshold_multi_core
-                echo 3 > /sys/devices/system/cpu/cpufreq/ondemand/down_differential_multi_core
-                echo 960000 > /sys/devices/system/cpu/cpufreq/ondemand/optimal_freq
-                echo 960000 > /sys/devices/system/cpu/cpufreq/ondemand/sync_freq
-                echo 1190400 > /sys/devices/system/cpu/cpufreq/ondemand/input_boost
-                echo 80 > /sys/devices/system/cpu/cpufreq/ondemand/up_threshold_any_cpu_load
+                echo "interactive" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+                echo "interactive" > /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor
+                echo "interactive" > /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
+                echo "interactive" > /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor
+                echo 50000 > /sys/devices/system/cpu/cpufreq/interactive/sampling_rate
+                echo 90 > /sys/devices/system/cpu/cpufreq/interactive/up_threshold
+                echo 0 > /sys/devices/system/cpu/cpufreq/interactive/io_is_busy
+                echo 2 > /sys/devices/system/cpu/cpufreq/interactive/sampling_down_factor
+                echo 10 > /sys/devices/system/cpu/cpufreq/interactive/down_differential
+                echo 70 > /sys/devices/system/cpu/cpufreq/interactive/up_threshold_multi_core
+                echo 3 > /sys/devices/system/cpu/cpufreq/interactive/down_differential_multi_core
+                echo 307200 > /sys/devices/system/cpu/interactive/interactive/optimal_freq
+                echo 307200 > /sys/devices/system/cpu/interactive/interactive/sync_freq
+                echo 0 > /sys/devices/system/cpu/cpufreq/interactive/input_boost
+                echo 80 > /sys/devices/system/cpu/cpufreq/interactive/up_threshold_any_cpu_load
             ;;
         esac
-        echo 300000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
-        echo 300000 > /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq
-        echo 300000 > /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq
-        echo 300000 > /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq
+        echo 307200 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+        echo 307200 > /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq
+        echo 307200 > /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq
+        echo 307200 > /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq
         chown -h system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
         chown -h system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
         echo 1 > /sys/module/msm_thermal/core_control/enabled
@@ -516,18 +516,18 @@ case "$target" in
         echo 1 > /sys/devices/system/cpu/cpu1/online
         echo 1 > /sys/devices/system/cpu/cpu2/online
         echo 1 > /sys/devices/system/cpu/cpu3/online
-        echo "ondemand" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-        echo 50000 > /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate
-        echo 90 > /sys/devices/system/cpu/cpufreq/ondemand/up_threshold
-        echo 1 > /sys/devices/system/cpu/cpufreq/ondemand/io_is_busy
-        echo 2 > /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor
-        echo 10 > /sys/devices/system/cpu/cpufreq/ondemand/down_differential
-        echo 70 > /sys/devices/system/cpu/cpufreq/ondemand/up_threshold_multi_core
-        echo 10 > /sys/devices/system/cpu/cpufreq/ondemand/down_differential_multi_core
-        echo 787200 > /sys/devices/system/cpu/cpufreq/ondemand/optimal_freq
-        echo 300000 > /sys/devices/system/cpu/cpufreq/ondemand/sync_freq
-        echo 80 > /sys/devices/system/cpu/cpufreq/ondemand/up_threshold_any_cpu_load
-        echo 300000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+        echo "interactive" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+        echo 50000 > /sys/devices/system/cpu/cpufreq/interactive/sampling_rate
+        echo 90 > /sys/devices/system/cpu/cpufreq/interactive/up_threshold
+        echo 0 > /sys/devices/system/cpu/cpufreq/interactive/io_is_busy
+        echo 2 > /sys/devices/system/cpu/cpufreq/interactive/sampling_down_factor
+        echo 10 > /sys/devices/system/cpu/cpufreq/interactive/down_differential
+        echo 70 > /sys/devices/system/cpu/cpufreq/interactive/up_threshold_multi_core
+        echo 10 > /sys/devices/system/cpu/cpufreq/interactive/down_differential_multi_core
+        echo 307200 > /sys/devices/system/cpu/cpufreq/interactive/optimal_freq
+        echo 307200 > /sys/devices/system/cpu/cpufreq/interactive/sync_freq
+        echo 155 > /sys/devices/system/cpu/cpufreq/interactive/up_threshold_any_cpu_load
+        echo 307200 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
         chown -h system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
         chown -h system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
         chown -h root.system /sys/devices/system/cpu/cpu1/online
@@ -561,18 +561,18 @@ case "$target" in
         echo 1 > /sys/devices/system/cpu/cpu1/online
         echo 1 > /sys/devices/system/cpu/cpu2/online
         echo 1 > /sys/devices/system/cpu/cpu3/online
-        echo "ondemand" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-        echo 50000 > /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate
-        echo 90 > /sys/devices/system/cpu/cpufreq/ondemand/up_threshold
-        echo 1 > /sys/devices/system/cpu/cpufreq/ondemand/io_is_busy
-        echo 2 > /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor
-        echo 10 > /sys/devices/system/cpu/cpufreq/ondemand/down_differential
-        echo 70 > /sys/devices/system/cpu/cpufreq/ondemand/up_threshold_multi_core
-        echo 10 > /sys/devices/system/cpu/cpufreq/ondemand/down_differential_multi_core
-        echo 787200 > /sys/devices/system/cpu/cpufreq/ondemand/optimal_freq
-        echo 300000 > /sys/devices/system/cpu/cpufreq/ondemand/sync_freq
-        echo 80 > /sys/devices/system/cpu/cpufreq/ondemand/up_threshold_any_cpu_load
-        echo 300000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+        echo "interactive" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+        echo 50000 > /sys/devices/system/cpu/cpufreq/interactive/sampling_rate
+        echo 90 > /sys/devices/system/cpu/cpufreq/interactive/up_threshold
+        echo 1 > /sys/devices/system/cpu/cpufreq/interactive/io_is_busy
+        echo 2 > /sys/devices/system/cpu/cpufreq/interactive/sampling_down_factor
+        echo 10 > /sys/devices/system/cpu/cpufreq/interactive/down_differential
+        echo 70 > /sys/devices/system/cpu/cpufreq/interactive/up_threshold_multi_core
+        echo 10 > /sys/devices/system/cpu/cpufreq/interactive/down_differential_multi_core
+        echo 307200 > /sys/devices/system/cpu/cpufreq/interactive/optimal_freq
+        echo 307200 > /sys/devices/system/cpu/cpufreq/interactive/sync_freq
+        echo 155 > /sys/devices/system/cpu/cpufreq/interactive/up_threshold_any_cpu_load
+        echo 307200 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
         setprop ro.qualcomm.perf.min_freq 7
         echo 1 > /sys/kernel/mm/ksm/deferred_timer
         chown -h system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
@@ -612,16 +612,16 @@ case "$target" in
                 echo 0 > /sys/module/msm_thermal/core_control/enabled
 		echo 1 > /sys/devices/system/cpu/cpu0/online
                 echo "interactive" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-                echo 800000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+                echo 384000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
                 # enable thermal core_control now
                 echo 1 > /sys/module/msm_thermal/core_control/enabled
 
                 echo "25000 1094400:50000" > /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay
                 echo 90 > /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load
                 echo 25000 > /sys/devices/system/cpu/cpufreq/interactive/timer_rate
-                echo 998400 > /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
+                echo 307200 > /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
                 echo 0 > /sys/devices/system/cpu/cpufreq/interactive/io_is_busy
-                echo "1 800000:85 998400:90 1094400:80" > /sys/devices/system/cpu/cpufreq/interactive/target_loads
+                echo "71 480000:70 556800:77 652800:79 729600:83 844800:87 960000:92 1036800:9 1228800:96" > /sys/devices/system/cpu/cpufreq/interactive/target_loads
                 echo 50000 > /sys/devices/system/cpu/cpufreq/interactive/min_sample_time
                 echo 50000 > /sys/devices/system/cpu/cpufreq/interactive/sampling_down_factor
 
@@ -641,16 +641,16 @@ case "$target" in
                 echo 0 > /sys/module/msm_thermal/core_control/enabled
 		echo 1 > /sys/devices/system/cpu/cpu0/online
                 echo "interactive" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-                echo 800000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+                echo 307200 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
                 # enable thermal core_control now
                 echo 1 > /sys/module/msm_thermal/core_control/enabled
 
                 echo "25000 1113600:50000" > /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay
-                echo 90 > /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load
+                echo 155 > /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load
                 echo 25000 > /sys/devices/system/cpu/cpufreq/interactive/timer_rate
-                echo 960000 > /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
+                echo 307200 > /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
                 echo 0 > /sys/devices/system/cpu/cpufreq/interactive/io_is_busy
-                echo "1 800000:85 1113600:90 1267200:80" > /sys/devices/system/cpu/cpufreq/interactive/target_loads
+                echo "71 480000:70 556800:77 652800:79 729600:83 844800:87 960000:92 1036800:9 1228800:96" > /sys/devices/system/cpu/cpufreq/interactive/target_loads
                 echo 50000 > /sys/devices/system/cpu/cpufreq/interactive/min_sample_time
                 echo 50000 > /sys/devices/system/cpu/cpufreq/interactive/sampling_down_factor
 
@@ -678,14 +678,14 @@ case "$target" in
                 echo 1 > /sys/devices/system/cpu/cpu0/online
                 echo "interactive" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
                 echo "25000 1113600:50000" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
-                echo 90 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load
+                echo 155 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load
                 echo 25000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate
-                echo 960000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
+                echo 307200 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
                 echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/io_is_busy
                 echo "1 800000:85 1113600:90 1267200:80" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
                 echo 50000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
                 echo 50000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/sampling_down_factor
-                echo 800000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+                echo 307200 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
 
                 # enable governor for power cluster
                 echo 1 > /sys/devices/system/cpu/cpu4/online
@@ -695,10 +695,10 @@ case "$target" in
                 echo 25000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_rate
                 echo 800000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq
                 echo 0 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/io_is_busy
-                echo "1 499200:75 800000:80" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads
+                echo "65 729600:75 844800:87 940800:80 1036800:99 1401600:97 1824000:99" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads
                 echo 50000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time
                 echo 50000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/sampling_down_factor
-                echo 499200 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq
+                echo 307200 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq
 
                 # enable thermal core_control now
 		echo 1 > /sys/module/msm_thermal/core_control/enabled
@@ -827,23 +827,23 @@ case "$target" in
                 echo 20000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate
                 echo 1113600 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
                 echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/io_is_busy
-                echo "1 960000:85 1113600:90 1344000:80" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
+                echo "71 480000:70 556800:77 652800:79 729600:83 844800:87 960000:92 1036800:9 1228800:96" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
                 echo 40000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
                 echo 40000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/sampling_down_factor
-                echo 960000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+                echo 307200  > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
 
                 # enable governor for power cluster
                 echo 1 > /sys/devices/system/cpu/cpu4/online
                 echo "interactive" > /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor
                 echo 39000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay
-                echo 90 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load
+                echo 155 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load
                 echo 20000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_rate
-                echo 800000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq
+                echo 307200  > /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq
                 echo 0 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/io_is_busy
                 echo "1 800000:90" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads
                 echo 40000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time
                 echo 40000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/sampling_down_factor
-                echo 800000 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq
+                echo 307200  > /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq
 
                 # re-enable thermal & BCL core_control now
                 echo 1 > /sys/module/msm_thermal/core_control/enabled
@@ -987,30 +987,30 @@ case "$target" in
                 # enable governor for power cluster
                 echo 1 > /sys/devices/system/cpu/cpu0/online
                 echo "interactive" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-                echo 90 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load
+                echo 155 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load
                 echo 20000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate
                 echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/io_is_busy
                 echo 40000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
-                echo 691200 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+                echo 307200  > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
 
                 # enable governor for perf cluster
                 echo 1 > /sys/devices/system/cpu/cpu4/online
                 echo "interactive" > /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor
-                echo 85 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load
+                echo 155 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load
                 echo 20000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_rate
                 echo 0 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/io_is_busy
                 echo 40000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time
                 echo 40000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/sampling_down_factor
-                echo 883200 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq
+                echo 307200  > /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq
 
                 if [ $panel -gt 1080 ]; then
                     echo 19000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
-                    echo 1017600 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
-                    echo "80" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
-                    echo 1382400 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq
-                    echo 800000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/max_freq_hysteresis
+                    echo 307200 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
+                    echo "71 480000:70 556800:77 652800:79 729600:83 844800:87 960000:92 1036800:9 1228800:96" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
+                    echo 307200 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq
+                    echo 0 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/max_freq_hysteresis
                     echo "19000 1382400:39000" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay
-                    echo "85 1382400:90 1747200:80" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads
+                    echo "65 729600:75 844800:87 940800:80 1036800:99 1401600:97 1824000:99" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads
                     # HMP Task packing settings for 8976
                     echo 30 > /proc/sys/kernel/sched_small_task
                     echo 20 > /sys/devices/system/cpu/cpu0/sched_mostly_idle_load
@@ -1023,11 +1023,11 @@ case "$target" in
                     echo 20 > /sys/devices/system/cpu/cpu7/sched_mostly_idle_load
                 else
                     echo 39000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
-                    echo 806400 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
-                    echo "1 691200:90" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
-                    echo 1190400 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq
+                    echo 307200 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
+                    echo "71 480000:70 556800:77 652800:79 729600:83 844800:87 960000:92 1036800:9 1228800:96" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
+                    echo 307200 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq
                     echo "19000 1190400:39000" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay
-                    echo "85 1190400:90 1747200:80" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads
+                    echo "65 729600:75 844800:87 940800:80 1036800:99 1401600:97 1824000:99" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads
                     # HMP Task packing settings for 8976
                     echo 20 > /proc/sys/kernel/sched_small_task
                     echo 30 > /sys/devices/system/cpu/cpu0/sched_mostly_idle_load
@@ -1262,12 +1262,12 @@ case "$target" in
                 echo "19000 1401600:39000" > /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay
                 echo 85 > /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load
                 echo 20000 > /sys/devices/system/cpu/cpufreq/interactive/timer_rate
-                echo 1401600 > /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
+                echo 307200 > /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
                 echo 0 > /sys/devices/system/cpu/cpufreq/interactive/io_is_busy
                 echo "85 1401600:80" > /sys/devices/system/cpu/cpufreq/interactive/target_loads
                 echo 39000 > /sys/devices/system/cpu/cpufreq/interactive/min_sample_time
                 echo 40000 > /sys/devices/system/cpu/cpufreq/interactive/sampling_down_factor
-                echo 652800 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+                echo 307200 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
 
                 # re-enable thermal & BCL core_control now
                 echo 1 > /sys/module/msm_thermal/core_control/enabled
@@ -1413,14 +1413,14 @@ case "$target" in
                 echo 1 > /sys/devices/system/cpu/cpu0/online
                 echo "interactive" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
                 echo "19000 1094400:39000" > /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay
-                echo 85 > /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load
+                echo 155 > /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load
                 echo 20000 > /sys/devices/system/cpu/cpufreq/interactive/timer_rate
-                echo 1094400 > /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
+                echo 307200 > /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
                 echo 0 > /sys/devices/system/cpu/cpufreq/interactive/io_is_busy
                 echo "1 960000:85 1094400:90" > /sys/devices/system/cpu/cpufreq/interactive/target_loads
                 echo 40000 > /sys/devices/system/cpu/cpufreq/interactive/min_sample_time
                 echo 40000 > /sys/devices/system/cpu/cpufreq/interactive/sampling_down_factor
-                echo 960000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+                echo 307200 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
 
                 # re-enable thermal core_control now
                 echo 1 > /sys/module/msm_thermal/core_control/enabled
@@ -1536,11 +1536,11 @@ case "$target" in
                 echo 1 > /sys/devices/system/cpu/cpu0/online
                 echo "interactive" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
                 echo "19000 1094400:39000" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
-                echo 85 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load
+                echo 155 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load
                 echo 20000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate
-                echo 1094400 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
+                echo 307200 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
                 echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/io_is_busy
-                echo "1 960000:85 1094400:90 1344000:80" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
+                echo "71 480000:70 556800:77 652800:79 729600:83 844800:87 960000:92 1036800:9 1228800:96" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
                 echo 40000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
                 echo 40000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/sampling_down_factor
                 echo 960000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
@@ -1549,14 +1549,14 @@ case "$target" in
                 echo 1 > /sys/devices/system/cpu/cpu4/online
                 echo "interactive" > /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor
                 echo 39000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay
-                echo 90 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load
+                echo 155 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load
                 echo 20000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_rate
-                echo 768000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq
+                echo 307200 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq
                 echo 0 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/io_is_busy
                 echo "1 768000:90" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads
                 echo 40000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time
                 echo 40000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/sampling_down_factor
-                echo 768000 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq
+                echo 307200 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq
 
                 # Disable L2-GDHS low power modes
                 echo N > /sys/module/lpm_levels/system/pwr/pwr-l2-gdhs/idle_enabled
@@ -1649,20 +1649,20 @@ case "$target" in
         echo "interactive" > /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
         echo "interactive" > /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor
         echo "20000 1400000:40000 1700000:20000" > /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay
-        echo 90 > /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load
-        echo 1497600 > /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
-        echo "85 1500000:90 1800000:70" > /sys/devices/system/cpu/cpufreq/interactive/target_loads
+        echo 155 > /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load
+        echo 307200  > /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
+        echo "71 480000:70 556800:77 652800:79 729600:83 844800:87 960000:92 1036800:9 1228800:96" > /sys/devices/system/cpu/cpufreq/interactive/target_loads
         echo 40000 > /sys/devices/system/cpu/cpufreq/interactive/min_sample_time
-        echo 20 > /sys/module/cpu_boost/parameters/boost_ms
+        echo 0 > /sys/module/cpu_boost/parameters/boost_ms
         echo 1728000 > /sys/module/cpu_boost/parameters/sync_threshold
         echo 100000 > /sys/devices/system/cpu/cpufreq/interactive/sampling_down_factor
-        echo 1497600 > /sys/module/cpu_boost/parameters/input_boost_freq
-        echo 40 > /sys/module/cpu_boost/parameters/input_boost_ms
+        echo 0 > /sys/module/cpu_boost/parameters/input_boost_freq
+        echo 0 > /sys/module/cpu_boost/parameters/input_boost_ms
         echo 1 > /dev/cpuctl/apps/cpu.notify_on_migrate
-        echo 300000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
-        echo 300000 > /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq
-        echo 300000 > /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq
-        echo 300000 > /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq
+        echo 307200  > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+        echo 307200  > /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq
+        echo 307200  > /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq
+        echo 307200  > /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq
         echo 1 > /sys/module/msm_thermal/core_control/enabled
         setprop ro.qualcomm.perf.cores_online 2
         chown -h  system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
@@ -1705,17 +1705,17 @@ case "$target" in
         echo 1 > /sys/devices/system/cpu/cpu1/online
         echo 1 > /sys/devices/system/cpu/cpu2/online
         echo 1 > /sys/devices/system/cpu/cpu3/online
-        echo "ondemand" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-        echo "ondemand" > /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor
-        echo "ondemand" > /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
-        echo "ondemand" > /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor
-        echo 50000 > /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate
-        echo 90 > /sys/devices/system/cpu/cpufreq/ondemand/up_threshold
-        echo 1 > /sys/devices/system/cpu/cpufreq/ondemand/io_is_busy
-        echo 300000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
-        echo 300000 > /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq
-        echo 300000 > /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq
-        echo 300000 > /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq
+        echo "interactive" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+        echo "interactive" > /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor
+        echo "interactive" > /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
+        echo "interactive" > /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor
+        echo 50000 > /sys/devices/system/cpu/cpufreq/interactive/sampling_rate
+        echo 90 > /sys/devices/system/cpu/cpufreq/interactive/up_threshold
+        echo 0 > /sys/devices/system/cpu/cpufreq/interactive/io_is_busy
+        echo 307200 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+        echo 307200 > /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq
+        echo 307200 > /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq
+        echo 307200 > /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq
         echo 1 > /sys/module/msm_thermal/core_control/enabled
         chown -h  system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
         chown -h system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
@@ -1746,12 +1746,12 @@ case "$target" in
         echo 19000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
         echo 90 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load
         echo 20000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate
-        echo 960000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
+        echo 307200 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
         echo 1 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/io_is_busy
-        echo 80 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
+        echo 71 480000:70 556800:77 652800:79 729600:83 844800:87 960000:92 1036800:9 1228800:96 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
         echo 40000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
         echo 80000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/max_freq_hysteresis
-        echo 384000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+        echo 307200 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
         # online CPU4
         echo 1 > /sys/devices/system/cpu/cpu4/online
         # configure governor settings for big cluster
@@ -1759,14 +1759,14 @@ case "$target" in
         echo 1 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/use_sched_load
         echo 1 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/use_migration_notif
         echo 19000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay
-        echo 90 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load
+        echo 155 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load
         echo 20000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_rate
         echo 1536000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq
         echo 1 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/io_is_busy
         echo 85 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads
         echo 40000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time
         echo 80000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/max_freq_hysteresis
-        echo 384000 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq
+        echo 307200 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq
         # re-enable thermal and BCL hotplug
         echo 1 > /sys/module/msm_thermal/core_control/enabled
         echo -n disable > /sys/devices/soc.*/qcom,bcl.*/mode
@@ -1776,8 +1776,8 @@ case "$target" in
         # plugin remaining A57s
         echo 1 > /sys/devices/system/cpu/cpu5/online
         # input boost configuration
-        echo 0:1248000 > /sys/module/cpu_boost/parameters/input_boost_freq
-        echo 40 > /sys/module/cpu_boost/parameters/input_boost_ms
+        echo 0:0 > /sys/module/cpu_boost/parameters/input_boost_freq
+        echo 0 > /sys/module/cpu_boost/parameters/input_boost_ms
         # Enable task migration fixups in the scheduler
         echo 1 > /proc/sys/kernel/sched_migration_fixup
         for devfreq_gov in /sys/class/devfreq/qcom,cpubw*/governor
@@ -1797,7 +1797,7 @@ case "$target" in
         echo 0 > /sys/devices/system/cpu/cpu6/online
         echo 0 > /sys/devices/system/cpu/cpu7/online
         # in case CPU4 is online, limit its frequency
-        echo 960000 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq
+        echo 307200 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq
         # Limit A57 max freq from msm_perf module in case CPU 4 is offline
         echo "4:960000 5:960000 6:960000 7:960000" > /sys/module/msm_performance/parameters/cpu_max_freq
         # disable thermal bcl hotplug to switch governor
@@ -1827,12 +1827,12 @@ case "$target" in
         echo 19000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
         echo 90 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load
         echo 20000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate
-        echo 960000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
+        echo 307200 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
         echo 1 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/io_is_busy
         echo 80 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
         echo 40000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
         echo 80000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/max_freq_hysteresis
-        echo 384000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+        echo 307200 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
         # online CPU4
         echo 1 > /sys/devices/system/cpu/cpu4/online
         # Best effort limiting for first time boot if msm_performance module is absent
@@ -1842,14 +1842,14 @@ case "$target" in
         echo 1 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/use_sched_load
         echo 1 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/use_migration_notif
         echo "19000 1400000:39000 1700000:19000" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay
-        echo 90 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load
+        echo 155 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load
         echo 20000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_rate
-        echo 1248000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq
+        echo 307200 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq
         echo 1 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/io_is_busy
         echo "85 1500000:90 1800000:70" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads
         echo 40000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time
         echo 80000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/max_freq_hysteresis
-        echo 384000 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq
+        echo 307200 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq
         # restore A57's max
         cat /sys/devices/system/cpu/cpu4/cpufreq/cpuinfo_max_freq > /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq
         # re-enable thermal and BCL hotplug
@@ -1878,7 +1878,7 @@ case "$target" in
         # Restore CPU 4 max freq from msm_performance
         echo "4:4294967295 5:4294967295 6:4294967295 7:4294967295" > /sys/module/msm_performance/parameters/cpu_max_freq
         # input boost configuration
-        echo 0:1344000 > /sys/module/cpu_boost/parameters/input_boost_freq
+        echo 0:0 > /sys/module/cpu_boost/parameters/input_boost_freq
         echo 40 > /sys/module/cpu_boost/parameters/input_boost_ms
         # Setting b.L scheduler parameters
         echo 1 > /proc/sys/kernel/sched_migration_fixup
@@ -1917,14 +1917,14 @@ case "$target" in
         echo 1 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_sched_load
         echo 1 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_migration_notif
         echo 19000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
-        echo 90 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load
+        echo 155 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load
         echo 20000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate
         echo 960000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
         echo 1 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/io_is_busy
         echo 80 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
         echo 19000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
         echo 79000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/max_freq_hysteresis
-        echo 300000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+        echo 307200 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
         echo 1 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/ignore_hispeed_on_notif
         # online CPU2
         echo 1 > /sys/devices/system/cpu/cpu2/online
@@ -1935,12 +1935,12 @@ case "$target" in
         echo "19000 1400000:39000 1700000:19000 2100000:79000" > /sys/devices/system/cpu/cpu2/cpufreq/interactive/above_hispeed_delay
         echo 90 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/go_hispeed_load
         echo 20000 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/timer_rate
-        echo 1248000 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/hispeed_freq
+        echo 307200 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/hispeed_freq
         echo 1 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/io_is_busy
         echo "85 1500000:90 1800000:70 2100000:95" > /sys/devices/system/cpu/cpu2/cpufreq/interactive/target_loads
         echo 19000 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/min_sample_time
         echo 79000 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/max_freq_hysteresis
-        echo 300000 > /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq
+        echo 307200 > /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq
         echo 1 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/ignore_hispeed_on_notif
 
         # Override with SOMC tuning parameters for governor
@@ -1953,7 +1953,7 @@ case "$target" in
         echo $bcl_soc_hotplug_mask > /sys/devices/soc/soc:qcom,bcl/hotplug_soc_mask
         echo -n enable > /sys/devices/soc/soc:qcom,bcl/mode
         # input boost configuration
-        echo "0:1324800 2:1324800" > /sys/module/cpu_boost/parameters/input_boost_freq
+        echo "0:0 2:0" > /sys/module/cpu_boost/parameters/input_boost_freq
         echo 40 > /sys/module/cpu_boost/parameters/input_boost_ms
         # Setting b.L scheduler parameters
         echo 0 > /proc/sys/kernel/sched_boost
@@ -2062,12 +2062,12 @@ case "$target" in
 	echo 19000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
 	echo 90 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load
 	echo 20000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate
-	echo 1190400 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
+	echo 307200 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
 	echo 1 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/io_is_busy
 	echo "83 1804800:95" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
 	echo 19000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
 	echo 79000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/max_freq_hysteresis
-	echo 300000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+	echo 307200 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
 	echo 1 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/ignore_hispeed_on_notif
 	# configure governor settings for big cluster
 	echo "interactive" > /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor
@@ -2076,16 +2076,16 @@ case "$target" in
 	echo 19000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay
 	echo 90 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load
 	echo 20000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_rate
-	echo 1536000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq
+	echo 307200 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq
 	echo 1 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/io_is_busy
 	echo "83 1939200:90 2016000:95" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads
 	echo 19000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time
 	echo 79000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/max_freq_hysteresis
-	echo 300000 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq
+	echo 307200 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq
 	echo 1 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/ignore_hispeed_on_notif
 
         # Enable input boost configuration
-        echo "0:1324800" > /sys/module/cpu_boost/parameters/input_boost_freq
+        echo "0:0" > /sys/module/cpu_boost/parameters/input_boost_freq
         echo 40 > /sys/module/cpu_boost/parameters/input_boost_ms
         # Enable bus-dcvs
         for cpubw in /sys/class/devfreq/*qcom,cpubw*
@@ -2162,16 +2162,16 @@ case "$target" in
         echo 0 > /sys/module/msm_thermal/core_control/enabled
         echo 1 > /sys/devices/system/cpu/cpu0/online
         echo "interactive" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-        echo 400000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+        echo 307200 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
         # enable thermal core_control now
         echo 1 > /sys/module/msm_thermal/core_control/enabled
 
         echo "25000 800000:50000" > /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay
         echo 90 > /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load
         echo 25000 > /sys/devices/system/cpu/cpufreq/interactive/timer_rate
-        echo 800000 > /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
+        echo 307200 > /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
         echo 0 > /sys/devices/system/cpu/cpufreq/interactive/io_is_busy
-        echo "1 400000:85 998400:90 1094400:80" > /sys/devices/system/cpu/cpufreq/interactive/target_loads
+        echo "85 1500000:90 1800000:70 2100000:95" > /sys/devices/system/cpu/cpufreq/interactive/target_loads
         echo 50000 > /sys/devices/system/cpu/cpufreq/interactive/min_sample_time
         echo 50000 > /sys/devices/system/cpu/cpufreq/interactive/sampling_down_factor
 
@@ -2196,7 +2196,7 @@ esac
 
 case "$target" in
     "qsd8250_surf" | "qsd8250_ffa" | "qsd8650a_st1x")
-        echo 50000 > /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate
+        echo 50000 > /sys/devices/system/cpu/cpufreq/interactive/sampling_rate
         ;;
 esac
 
@@ -2206,9 +2206,9 @@ case "$target" in
     ;;
 esac
 
-chown -h system /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate
-chown -h system /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor
-chown -h system /sys/devices/system/cpu/cpufreq/ondemand/io_is_busy
+chown -h system /sys/devices/system/cpu/cpufreq/interactive/sampling_rate
+chown -h system /sys/devices/system/cpu/cpufreq/interactive/sampling_down_factor
+chown -h system /sys/devices/system/cpu/cpufreq/interactive/io_is_busy
 
 emmc_boot=`getprop ro.boot.emmc`
 case "$emmc_boot"
@@ -2291,7 +2291,7 @@ case "$target" in
     echo 1 > /sys/module/pm2/modes/cpu0/power_collapse/suspend_enabled
     #IdlePC:
     echo 1 > /sys/module/pm2/modes/cpu0/power_collapse/idle_enabled
-    echo 25000 > /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate
+    echo 25000 > /sys/devices/system/cpu/cpufreq/interactive/sampling_rate
     ;;
 esac
 
@@ -2299,7 +2299,7 @@ esac
 case "$target" in
      "msm7627a")
     echo 0,1,2,4,9,12 > /sys/module/lowmemorykiller/parameters/adj
-    echo 5120 > /proc/sys/vm/min_free_kbytes
+    echo 9120 > /proc/sys/vm/min_free_kbytes
      ;;
 esac
 
@@ -2322,7 +2322,7 @@ case "$target" in
      "msm8660")
         start qosmgrd
         echo 0,1,2,4,9,12 > /sys/module/lowmemorykiller/parameters/adj
-        echo 5120 > /proc/sys/vm/min_free_kbytes
+        echo 9120 > /proc/sys/vm/min_free_kbytes
      ;;
 esac
 
