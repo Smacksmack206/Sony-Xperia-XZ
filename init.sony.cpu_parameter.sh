@@ -7,5 +7,6 @@
 
 # set cpu_boost parameters
 echo "0" > /sys/module/cpu_boost/parameters/input_boost_ms
+echo 0 > /sys/module/cpu_boost/parameters/input_boost_enabled
 
 exit 0
