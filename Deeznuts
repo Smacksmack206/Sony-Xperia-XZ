@@ -107,7 +107,9 @@ if [ -e "/sys/devices/system/cpu/cpu2/cpufreq/interactive/enable_prediction" ]; 
     echo 0 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/enable_prediction
 fi
 
-
+#Disable Inputboost
+echo Disabling Inputboost
+echo 0 > /sys/module/cpu_boost/parameters/input_boost_enabled
 
 
 
