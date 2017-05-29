@@ -1913,35 +1913,35 @@ case "$target" in
         echo 1 > /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
         echo 81250 > /sys/module/lowmemorykiller/parameters/vmpressure_file_min
         # configure governor settings for little cluster
-        echo "interactive" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-        echo 1 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_sched_load
-        echo 1 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_migration_notif
-        echo 19000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
-        echo 155 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load
-        echo 20000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate
-        echo 960000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
-        echo 1 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/io_is_busy
-        echo 80 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
-        echo 19000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
-        echo 79000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/max_freq_hysteresis
+        echo "ondemand" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+        echo 1 > /sys/devices/system/cpu/cpu0/cpufreq/ondemand/use_sched_load
+        echo 1 > /sys/devices/system/cpu/cpu0/cpufreq/ondemand/use_migration_notif
+        echo 19000 > /sys/devices/system/cpu/cpu0/cpufreq/ondemand/above_hispeed_delay
+        echo 155 > /sys/devices/system/cpu/cpu0/cpufreq/ondemand/go_hispeed_load
+        echo 20000 > /sys/devices/system/cpu/cpu0/cpufreq/ondemand/timer_rate
+        echo 960000 > /sys/devices/system/cpu/cpu0/cpufreq/ondemand/hispeed_freq
+        echo 1 > /sys/devices/system/cpu/cpu0/cpufreq/ondemand/io_is_busy
+        echo 80 > /sys/devices/system/cpu/cpu0/cpufreq/ondemand/target_loads
+        echo 19000 > /sys/devices/system/cpu/cpu0/cpufreq/ondemand/min_sample_time
+        echo 79000 > /sys/devices/system/cpu/cpu0/cpufreq/ondemand/max_freq_hysteresis
         echo 307200 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
-        echo 1 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/ignore_hispeed_on_notif
+        echo 1 > /sys/devices/system/cpu/cpu0/cpufreq/ondemand/ignore_hispeed_on_notif
         # online CPU2
         echo 1 > /sys/devices/system/cpu/cpu2/online
         # configure governor settings for big cluster
-        echo "interactive" > /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
-        echo 1 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/use_sched_load
-        echo 1 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/use_migration_notif
-        echo "19000 1400000:39000 1700000:19000 2100000:79000" > /sys/devices/system/cpu/cpu2/cpufreq/interactive/above_hispeed_delay
-        echo 90 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/go_hispeed_load
-        echo 20000 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/timer_rate
-        echo 307200 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/hispeed_freq
+        echo "ondemand" > /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
+        echo 1 > /sys/devices/system/cpu/cpu2/cpufreq/ondemand/use_sched_load
+        echo 1 > /sys/devices/system/cpu/cpu2/cpufreq/ondemand/use_migration_notif
+        echo "19000 1400000:39000 1700000:19000 2100000:79000" > /sys/devices/system/cpu/cpu2/cpufreq/ondemand/above_hispeed_delay
+        echo 90 > /sys/devices/system/cpu/cpu2/cpufreq/ondemand/go_hispeed_load
+        echo 20000 > /sys/devices/system/cpu/cpu2/cpufreq/ondemand/timer_rate
+        echo 307200 > /sys/devices/system/cpu/cpu2/cpufreq/ondemand/hispeed_freq
         echo 1 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/io_is_busy
-        echo "85 1500000:90 1800000:70 2100000:95" > /sys/devices/system/cpu/cpu2/cpufreq/interactive/target_loads
-        echo 19000 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/min_sample_time
-        echo 79000 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/max_freq_hysteresis
+        echo "85 1500000:90 1800000:70 2100000:95" > /sys/devices/system/cpu/cpu2/cpufreq/ondemand/target_loads
+        echo 19000 > /sys/devices/system/cpu/cpu2/cpufreq/ondemand/min_sample_time
+        echo 79000 > /sys/devices/system/cpu/cpu2/cpufreq/ondemand/max_freq_hysteresis
         echo 307200 > /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq
-        echo 1 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/ignore_hispeed_on_notif
+        echo 1 > /sys/devices/system/cpu/cpu2/cpufreq/ondemand/ignore_hispeed_on_notif
 
         # Override with SOMC tuning parameters for governor
         /system/bin/sh /system/etc/init.sony.cpu_parameter_gov.sh
