@@ -127,10 +127,10 @@ fi
 #Enable Core Control and Disable MSM Thermal Throttling allowing for longer sustained performance
 echo Disabling Aggressive CPU Thermal Throttling
 if [ -e "/sys/module/msm_thermal/core_control/enabled" ]; then
-echo 1 > /sys/module/msm_thermal/core_control/enabled
+echo 0 > /sys/module/msm_thermal/core_control/enabled
 fi
 if [ -e "/sys/module/msm_thermal/parameters/enabled" ]; then
-echo N > /sys/module/msm_thermal/parameters/enabled
+echo Y > /sys/module/msm_thermal/parameters/enabled
 fi
 #Tweak HMP Scheduler to feed the Big cluster more tasks
 sleep 0.3
