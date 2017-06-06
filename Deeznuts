@@ -24,10 +24,10 @@ echo Build Status: STABLE
 echo Last Updated: 6/06/2017
 echo 
 echo ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-sleep 0.2
+sleep 0.1
 #Apply settings to LITTLE cluster
 echo Applying settings to LITTLE Cluster...
-sleep 0.3
+sleep 0.2
 #Temporarily change permissions to governor files for the LITTLE cluster to enable Interactive governor
 chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 echo interactive > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
@@ -40,9 +40,7 @@ chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
 echo 1593600 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq     #Core 0 Maximum Frequency = 1593MHz         
 chmod 444 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
 chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
-#122880:96 to encourage little cluster to stay on higher frequency
-#1036800:9 to encourage little cluster to SKIP this frequency as it is inefficient
-echo 71 480000:70 556800:77 652800:79 729600:83 844800:87 960000:92 1036800:9 1228800:96 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads 
+echo 71 307200:99 480000:70 556800:77 652800:79 729600:83 844800:87 960000:92 1036800:9 1228800:96 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads 
 chmod 444 /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
 
 #Duality Kernel and Androplus will no longer support oc
@@ -53,7 +51,7 @@ chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/*
 echo 145000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack
 echo 307200 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
 echo 86666 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate
-echo 0 729600:175000 844800:95000 960000:185000 1228800:175000 1478400:120000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
+echo 0 307200:9999 729600:190000 844800:95000 960000:185000 1228800:175000 1478400:120000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
 echo 155 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load
 echo 24000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
 echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/max_freq_hysteresis
@@ -90,7 +88,7 @@ chmod 644 /sys/devices/system/cpu/cpu2/cpufreq/interactive/*
 echo 160000 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/timer_slack
 echo 307200 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/hispeed_freq
 echo 110000 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/timer_rate
-echo 35000 729600:145000 940800:205000 1248000:175000 1401600:80000 1632000:180000 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/above_hispeed_delay
+echo 35000 307200:99999 729600:145000 940800:205000 1248000:175000 1401600:80000 1632000:180000 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/above_hispeed_delay
 echo 400 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/go_hispeed_load
 echo 0 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/min_sample_time
 echo 0 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/max_freq_hysteresis
@@ -115,8 +113,6 @@ echo Disabling InputBoost
 else
     echo "*Not supported for your current Kernel*"
 fi
-
-
 
 #Disable TouchBoost
 echo Disabling TouchBoost
@@ -206,7 +202,7 @@ else
 	echo ' *Adaptive LMK is not present on your Kernel* '
 fi
 if [ -e "/sys/module/lowmemorykiller/parameters/minfree" ]; then
-	echo 23939,44091,58788,73485,88182,102879 > /sys/module/lowmemorykiller/parameters/minfree
+	echo 28769,48791,56288,73485,88182,102879 > /sys/module/lowmemorykiller/parameters/minfree
 else
 	echo ' *LMK cannot currently be modified on your Kernel* '
 fi
