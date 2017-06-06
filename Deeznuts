@@ -215,14 +215,18 @@ fi
 
 
 
-#DO NOT powersave GPU
-#Instead I have added some Adreno Idler stuff
 if [ -e "/sys/module/adreno_idler" ]; then
 	echo 'Y' > /sys/module/adreno_idler/parameters/adreno_idler_active
 	echo'10000' > /sys/module/adreno_idler/parameters/adreno_idler_idleworkload
 else
 	echo ' Your Kernel Does not support Adreno IDLER '
 fi
+
+#Tweaking GPU
+sleep 0.1
+echo GPU Tweaking
+echo simple_ondemand > /sys/devices/soc/b00000.qcom,kgsl-3d0/devfreq/b00000.qcom,kgsl-3d0/governor
+
 #Tune Lazyplug	
 if [ -e "/sys/module/lazyplug" ]; then
 	echo '1250' > /sys/module/lazyplug/parameters/cpu_nr_run_theshold
