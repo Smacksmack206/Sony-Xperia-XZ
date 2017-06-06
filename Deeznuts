@@ -40,7 +40,7 @@ chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
 echo 1593600 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq     #Core 0 Maximum Frequency = 1593MHz         
 chmod 444 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
 chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
-echo 71 307200:99 480000:70 556800:77 652800:79 729600:83 844800:87 960000:92 1036800:9 1228800:96 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads 
+echo 71 307200:99 480000:70 556800:77 652800:79 729600:83 844800:87 960000:92 1036800:3 1228800:96 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads 
 chmod 444 /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
 
 #Duality Kernel and Androplus will no longer support oc
@@ -51,7 +51,7 @@ chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/*
 echo 145000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack
 echo 307200 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
 echo 86666 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate
-echo 0 307200:9999 480000:99999 729600:190000 844800:95000 960000:185000 1228800:175000 1478400:120000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
+echo 0 307200:9999 480000:99999 729600:190000 844800:95000 960000:9900 1228800:120 1478400:120000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
 echo 155 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load
 echo 24000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
 echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/max_freq_hysteresis
@@ -81,14 +81,14 @@ chmod 644 /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq
 echo 2150400 > /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq     #Core 2 Maximum Frequency = 2150MHz         
 chmod 444 /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq
 chmod 644 /sys/devices/system/cpu/cpu2/cpufreq/interactive/target_loads
-echo 65 307200:99 729600:75 844800:87 940800:80 1036800:49 1401600:97 1824000:99 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/target_loads 
+echo 90 307200:99 729600:98 844800:87 940800:80 1036800:49 1401600:97 1824000:99 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/target_loads 
 chmod 444 /sys/devices/system/cpu/cpu2/cpufreq/interactive/target_loads
 chmod 644 /sys/devices/system/cpu/cpu2/cpufreq/interactive/*
 #Tweak Interactive Governor
 echo 160000 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/timer_slack
 echo 307200 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/hispeed_freq
 echo 110000 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/timer_rate
-echo 35000 307200:99999 729600:145000 940800:205000 1248000:175000 1401600:80000 1632000:180000 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/above_hispeed_delay
+echo 35000 307200:99999 729600:999000 940800:205000 1248000:175000 1401600:80000 1632000:180000 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/above_hispeed_delay
 echo 400 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/go_hispeed_load
 echo 0 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/min_sample_time
 echo 0 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/max_freq_hysteresis
