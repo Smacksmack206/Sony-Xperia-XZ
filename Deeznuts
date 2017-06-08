@@ -40,7 +40,7 @@ chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
 echo 1593600 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq     #Core 0 Maximum Frequency = 1593MHz         
 chmod 444 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
 chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
-echo 90 307200:99 480000:90 556800:77 652800:79 729600:893 844800:87 960000: 1036800:100 1228800:20 1593600:0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads 
+echo 90 307200:99 480000:90 556800:77 652800:79 729600:893 844800:87 960000:97 1036800:100 1228800:20 1593600:0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads 
 chmod 444 /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
 
 #Duality Kernel and Androplus will no longer support oc
