@@ -1,0 +1,242 @@
+#!/system/bin/sh
+
+#Settings By: Smacksmack206
+#Device: Xperia XZ
+#Codename: Deeznuts
+#Build Status: Stable
+#Last Updated: 4/10/2017
+#Notes: THIS IS THE BEST THUS FAR
+#TWEAKS_BEGIN
+echo ""
+echo '*************************'
+echo PSA:
+echo this governor has standed the test of time
+echo can get up to 12 hrs SOT
+echo '*************************'
+echo ------------------------------------------------------------
+echo Applying 'Deeznuts'
+echo Advanced Kernel Settings
+echo ------------------------------------------------------------
+echo Settings By: smacksmack206
+echo "Device: Xperia XZ"
+echo Codename: 'Deeznuts'
+echo Build Status: STABLE
+echo Last Updated: 4/10/2017
+echo 
+echo ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+sleep 0.3
+#Apply settings to LITTLE cluster
+echo Applying settings to LITTLE Cluster...
+sleep 0.5
+#Temporarily change permissions to governor files for the LITTLE cluster to enable Interactive governor
+chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+echo interactive > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+chmod 444 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+#Grab Maximum Achievable Frequency for the LITTLE Cluster
+#Temporarily change permissions to governor files for the Big cluster to set the maximum frequency to 1593MHz
+echo No LITTLE Cluster Overclocking detected. 
+echo Applying appropriate values.
+chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+echo 1593600 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq     #Core 0 Maximum Frequency = 1593MHz         
+chmod 444 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
+#122880:96 to encourage little cluster to stay on higher frequency
+#1036800:9 to encourage little cluster to SKIP this frequency as it is inefficient
+echo 71 480000:70 556800:77 652800:79 729600:83 844800:87 960000:92 1036800:9 1228800:96 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads 
+chmod 444 /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
+
+#Duality Kernel and Androplus will no longer support oc
+#in favour of Energy Aware Scheduler
+#EAS will not play nice with overclocking 
+
+chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/*
+echo 145000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack
+echo 307200 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
+echo 86666 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate
+echo 0 729600:175000 844800:95000 960000:185000 1228800:175000 1478400:120000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
+echo 155 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load
+echo 24000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
+echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/max_freq_hysteresis
+echo 1 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/ignore_hispeed_on_notif
+echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/boost
+echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/fast_ramp_down
+echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/align_windows
+echo 1 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_migration_notif
+echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_sched_load
+echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/boostpulse_duration
+echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/io_is_busy
+if [ -e "/sys/devices/system/cpu/cpu0/cpufreq/interactive/enable_prediction" ]; then
+    chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/enable_prediction
+    echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/enable_prediction
+fi
+#Apply settings to Big cluster
+echo Applying settings to BIG Cluster
+#Temporarily change permissions to governor files for the LITTLE cluster to enable Interactive governor
+chmod 644 /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
+echo interactive > /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
+chmod 444 /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
+#Grab Maximum Achievable Frequency for the Big Cluster
+#Temporarily change permissions to governor files for the Big cluster to set the maximum frequency to 2150MHz
+echo No BIG Cluster Overclocking detected. 
+echo Applying appropriate values.
+chmod 644 /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq
+echo 2150400 > /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq     #Core 2 Maximum Frequency = 2150MHz         
+chmod 444 /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq
+chmod 644 /sys/devices/system/cpu/cpu2/cpufreq/interactive/target_loads
+echo 65 729600:75 844800:87 940800:80 1036800:99 1401600:97 1824000:99 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/target_loads 
+chmod 444 /sys/devices/system/cpu/cpu2/cpufreq/interactive/target_loads
+chmod 644 /sys/devices/system/cpu/cpu2/cpufreq/interactive/*
+#Tweak Interactive Governor
+echo 160000 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/timer_slack
+echo 307200 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/hispeed_freq
+echo 110000 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/timer_rate
+echo 35000 729600:145000 940800:205000 1248000:175000 1401600:80000 1632000:180000 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/above_hispeed_delay
+echo 400 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/go_hispeed_load
+echo 0 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/min_sample_time
+echo 0 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/max_freq_hysteresis
+echo 1 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/ignore_hispeed_on_notif
+echo 0 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/boost
+echo 1 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/fast_ramp_down
+echo 0 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/align_windows
+echo 1 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/use_migration_notif
+echo 0 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/use_sched_load
+echo 0 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/boostpulse_duration
+echo 0 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/io_is_busy
+if [ -e "/sys/devices/system/cpu/cpu2/cpufreq/interactive/enable_prediction" ]; then
+    chmod 644 /sys/devices/system/cpu/cpu2/cpufreq/interactive/enable_prediction
+    echo 0 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/enable_prediction
+fi
+
+
+
+
+
+#Disable TouchBoost
+echo Disabling TouchBoost
+    if [ -e "/sys/module/msm_performance/parameters/touchboost" ]; then
+    chmod 644 /sys/module/msm_performance/parameters/touchboost
+    echo 0 > /sys/module/msm_performance/parameters/touchboost
+else
+    echo "*Not supported for your current Kernel*"
+fi
+#Disable BCL
+echo Disabling BCL and Removing Perfd
+if [ -e "/sys/devices/soc/soc:qcom,bcl/mode" ]; then
+echo -n disable > /sys/devices/soc/soc:qcom,bcl/mode
+fi
+#Enable Core Control and Disable MSM Thermal Throttling allowing for longer sustained performance
+echo Disabling Aggressive CPU Thermal Throttling
+if [ -e "/sys/module/msm_thermal/core_control/enabled" ]; then
+echo 1 > /sys/module/msm_thermal/core_control/enabled
+fi
+if [ -e "/sys/module/msm_thermal/parameters/enabled" ]; then
+echo N > /sys/module/msm_thermal/parameters/enabled
+fi
+#Tweak HMP Scheduler to feed the Big cluster more tasks
+sleep 0.3
+echo Tweaking HMP Scheduler for correcting BIG Cluster utilization
+echo 2 > /proc/sys/kernel/sched_window_stats_policy
+echo 90 > /proc/sys/kernel/sched_upmigrate
+echo 65 > /proc/sys/kernel/sched_downmigrate
+echo 7 > /proc/sys/kernel/sched_spill_nr_run
+echo 97 > /proc/sys/kernel/sched_spill_load
+echo 30 > /proc/sys/kernel/sched_init_task_load
+if [ -e "/proc/sys/kernel/sched_heavy_task" ]; then
+    echo 96 > /proc/sys/kernel/sched_heavy_task
+fi
+echo 7 > /proc/sys/kernel/sched_upmigrate_min_nice
+echo 4 > /proc/sys/kernel/sched_ravg_hist_size
+if [ -e "/proc/sys/kernel/sched_small_wakee_task_load" ]; then
+	echo 15 > /proc/sys/kernel/sched_small_wakee_task_load
+fi
+if [ -e "/proc/sys/kernel/sched_wakeup_load_threshold" ]; then
+	echo 110 > /proc/sys/kernel/sched_wakeup_load_threshold
+fi
+if [ -e "/proc/sys/kernel/sched_small_task" ]; then
+	echo 15 > /proc/sys/kernel/sched_small_task
+fi
+if [ -e "/proc/sys/kernel/sched_big_waker_task_load" ]; then
+	echo 33 > /proc/sys/kernel/sched_big_waker_task_load
+fi
+echo 950000 > /proc/sys/kernel/sched_rt_runtime_us
+echo 1000000 > /proc/sys/kernel/sched_rt_period_us
+if [ -e "/proc/sys/kernel/sched_migration_fixup" ]; then
+	echo 1 > /proc/sys/kernel/sched_migration_fixup
+fi
+if [ -e "/proc/sys/kernel/sched_freq_dec_notify" ]; then
+	echo 410000 > /proc/sys/kernel/sched_freq_dec_notify
+fi
+if [ -e "/proc/sys/kernel/sched_freq_inc_notify" ]; then
+	echo 610000 > /proc/sys/kernel/sched_freq_inc_notify
+fi
+if [ -e "/proc/sys/kernel/sched_boost" ]; then
+	echo 0 > /proc/sys/kernel/sched_boost
+fi
+#Tweaks for other various Settings
+echo "=========================================="
+echo Tweaking other various Settings
+
+
+
+
+#Replaced with PDesire's values
+echo ·Memory Values
+echo '0' > /proc/sys/vm/laptop_mode
+echo '60' > /proc/sys/vm/overcommit_ratio
+echo '70' > /proc/sys/vm/vfs_cache_pressure
+echo '20' > /proc/sys/vm/dirty_ratio
+echo '10' > /proc/sys/vm/dirty_background_ratio
+echo '2000' > /proc/sys/vm/dirty_expire_centisecs
+echo '3000' > /proc/sys/vm/dirty_writeback_centisecs
+if [ -e "/sys/module/lowmemorykiller/parameters/enable_adaptive_lmk" ]; then
+chmod 666 /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
+chown root /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
+echo 0 > /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
+fi
+if [ -e "/sys/module/lowmemorykiller/parameters/enable_adaptive_lmk" ]; then
+	echo 0 > /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
+else
+	echo ' *Adaptive LMK is not present on your Kernel* '
+fi
+if [ -e "/sys/module/lowmemorykiller/parameters/minfree" ]; then
+	echo 23939,44091,58788,73485,88182,102879 > /sys/module/lowmemorykiller/parameters/minfree
+else
+	echo ' *LMK cannot currently be modified on your Kernel* '
+fi
+echo ·TCP Values
+string=$(</proc/sys/net/ipv4/tcp_available_congestion_control);
+if [[ $string == *"westwood"* ]]
+then
+echo westwood > /proc/sys/net/ipv4/tcp_congestion_control
+else
+	echo Westwood not avilable, using Cubic
+	echo cubic > /proc/sys/net/ipv4/tcp_congestion_control 
+fi
+
+
+
+#DO NOT powersave GPU
+#Instead I have added some Adreno Idler stuff
+if [ -e "/sys/module/adreno_idler" ]; then
+	echo 'Y' > /sys/module/adreno_idler/parameters/adreno_idler_active
+	echo'10000' > /sys/module/adreno_idler/parameters/adreno_idler_idleworkload
+else
+	echo ' Your Kernel Does not support Adreno IDLER '
+fi
+#Tune Lazyplug	
+if [ -e "/sys/module/lazyplug" ]; then
+	echo '1250' > /sys/module/lazyplug/parameters/cpu_nr_run_theshold
+	echo '5' > /sys/module/lazyplug/parameters/cpu_nr_hysteresis
+	echo '0' > /sys/module/lazyplug/parameters/nr_run_profile_sel
+else
+	echo ' Your Kernel Does not support Lazyplug '
+fi
+echo ------------------------------------------------------------
+echo 'Deeznuts' Successfully Applied!
+echo "Deeznuts" > /data/system/current_profile
+echo   You may now tweak them further
+echo    using EXKM or Kernel Adiutor
+echo ------------------------------------------------------------
+echo ""
+echo " Done, this will be automatically closed..."
+#################################################
