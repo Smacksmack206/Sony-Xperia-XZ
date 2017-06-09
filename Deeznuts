@@ -4,7 +4,7 @@
 #Device: Xperia XZ
 #Codename: Deeznuts
 #Build Status: Stable
-#Last Updated: 6/06/2017
+#Last Updated: 6/09/2017
 #Notes: THIS IS THE BEST THUS FAR
 #TWEAKS_BEGIN
 echo ""
@@ -40,7 +40,7 @@ chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
 echo 1593600 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq     #Core 0 Maximum Frequency = 1593MHz         
 chmod 444 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
 chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
-echo 90 307200:99 480000:90 556800:77 652800:79 729600:99 844800:87 960000:99 1036800:8 1228800:99999 1593600:0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads 
+echo 90 307200:99 480000:70 556800:85 652800:89 729600:99 844800:87 960000:99 1036800:8 1228800:99999 1593600:0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads 
 chmod 444 /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
 
 #Duality Kernel and Androplus will no longer support oc
@@ -51,7 +51,7 @@ chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/*
 echo 145000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack
 echo 307200 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
 echo 86666 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate
-echo 90 307200:90000 480000:50 729600:999 844800:950 960000:90 1036800:999 1228800:99990 1478400:2 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
+echo 90 307200:90000 480000:50 729600:9999 844800:950 960000:90 1036800:9999 1228800:9990 1478400:2 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
 echo 155 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load
 echo 24000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
 echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/max_freq_hysteresis
