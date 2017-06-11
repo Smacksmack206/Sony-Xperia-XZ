@@ -24,6 +24,23 @@ echo Build Status: STABLE
 echo Last Updated: 6/06/2017
 echo 
 echo ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+echo Checking Android version...
+if grep -q 'ro.build.version.sdk=25' /system/build.prop; then
+	echo Android Nougat 7.1.X detected!
+	sleep 0.1
+	echo N detected... Applying proper settings
+fi
+if grep -q 'ro.build.version.sdk=24' /system/build.prop; then
+	echo Android Nougat 7.0.X detected!
+	sleep 0.1
+	echo N detected... Applying proper settings
+fi
+if grep -q 'ro.build.version.sdk=23' /system/build.prop; then
+	echo Android Marshmallow 6.0.1 detected!
+	sleep 0.1
+	echo MM detected... Applying proper settings
+fi
+echo ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 sleep 0.1
 #Apply settings to LITTLE cluster
 echo Applying settings to LITTLE Cluster...
