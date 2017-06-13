@@ -57,7 +57,7 @@ chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
 echo 1593600 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq     #Core 0 Maximum Frequency = 1593MHz         
 chmod 444 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
 chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
-echo 98 307200:99 480000:70 556800:85 652800:89 729600:99 844800:47 960000:99 1036800:98 1228800:99 1593600:0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads 
+echo 98 307200:99 480000:70 556800:85 652800:89 729600:99 844800:47 960000:99 1036800:02 1228800:08 1593600:0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads 
 chmod 444 /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
 
 #Duality Kernel and Androplus will no longer support oc
@@ -68,7 +68,7 @@ chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/*
 echo 145000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack
 echo 307200 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
 echo 86666 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate
-echo 90 307200:90000 480000:50 729600:9999 844800:950 960000:90 1036800:9999 1228800:90 1478400:92 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
+echo 90 307200:90000 480000:50 729600:9999 844800:950 960000:90 1036800:09 1228800:00 1478400:00 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
 echo 155 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load
 echo 24000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
 echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/max_freq_hysteresis
