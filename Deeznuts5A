@@ -98,7 +98,7 @@ chmod 644 /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq
 echo 2150400 > /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq     #Core 2 Maximum Frequency = 2150MHz         
 chmod 444 /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq
 chmod 644 /sys/devices/system/cpu/cpu2/cpufreq/interactive/target_loads
-echo 05 307200:99 729600:96 844800:997 940800:20 1036800:96 1401600:99 1824000:00 2150400:00 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/target_loads 
+echo 05 307200:99 729600:96 844800:97 940800:999 1036800:96 1401600:99 1824000:00 2150400:00 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/target_loads 
 chmod 444 /sys/devices/system/cpu/cpu2/cpufreq/interactive/target_loads
 chmod 644 /sys/devices/system/cpu/cpu2/cpufreq/interactive/*
 #Tweak Interactive Governor
