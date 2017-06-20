@@ -45,17 +45,17 @@ sleep 0.1
 #Apply settings to LITTLE cluster
 echo Applying settings to LITTLE Cluster...
 sleep 0.2
-chmod 0777 /sys/devices/system/cpu/cpu2/core_ctl/*
-echo "40" > /sys/devices/system/cpu/cpu2/core_ctl/busy_up_thres
-echo "35" > /sys/devices/system/cpu/cpu2/core_ctl/busy_down_thres
-echo 1 > /sys/devices/system/cpu/cpu2/core_ctl/min_cpus
-chmod 0644 /sys/devices/system/cpu/cpu2/core_ctl/*
+chmod 0777 /sys/devices/system/cpu/cpu0/core_ctl/*
+echo "40" > /sys/devices/system/cpu/cpu0/core_ctl/busy_up_thres
+echo "35" > /sys/devices/system/cpu/cpu0/core_ctl/busy_down_thres
+echo 1 > /sys/devices/system/cpu/cpu0/core_ctl/min_cpus
+chmod 0644 /sys/devices/system/cpu/cpu0/core_ctl/*
 sleep 0.1
-chmod 0777 /sys/devices/system/cpu/cpu2/core_ctl/*
-echo "0" > /sys/devices/system/cpu/cpu2/core_ctl/busy_up_thres
-echo "0" > /sys/devices/system/cpu/cpu2/core_ctl/busy_down_thres
-echo 2 > /sys/devices/system/cpu/cpu2/core_ctl/min_cpus
-chmod 0644 /sys/devices/system/cpu/cpu2/core_ctl/*
+chmod 0777 /sys/devices/system/cpu/cpu0/core_ctl/*
+echo "0" > /sys/devices/system/cpu/cpu0/core_ctl/busy_up_thres
+echo "0" > /sys/devices/system/cpu/cpu0/core_ctl/busy_down_thres
+echo 2 > /sys/devices/system/cpu/cpu0/core_ctl/min_cpus
+chmod 0644 /sys/devices/system/cpu/cpu0/core_ctl/*
 #Temporarily change permissions to governor files for the LITTLE cluster to enable Interactive governor
 chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 echo interactive > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
@@ -68,7 +68,7 @@ chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
 echo 1593600 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq     #Core 0 Maximum Frequency = 1593MHz         
 chmod 444 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
 chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
-echo 98 307200:99 480000:70 556800:85 652800:89 729600:98 844800:47 960000:99 1036800:00 1228800:00 1593600:00 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads 
+echo 98 307200:99 480000:56 556800:70 652800:70 729600:9999 844800:00 960000:00 1036800:00 1228800:00 1593600:00 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads 
 chmod 444 /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
 
 
@@ -80,7 +80,7 @@ chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/*
 echo 145000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack
 echo 307200 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
 echo 86666 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate
-echo 90 307200:990 480000:9999 729600:999 844800:9999990 960000:9999990 1036800:00 1228800:00 1478400:00 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
+echo 90 307200:990 480000:99 729600:999 844800:90 960000:0 1036800:00 1228800:00 1478400:00 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
 echo 155 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load
 echo 24000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
 echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/max_freq_hysteresis
@@ -98,6 +98,18 @@ if [ -e "/sys/devices/system/cpu/cpu0/cpufreq/interactive/enable_prediction" ]; 
 fi
 #Apply settings to Big cluster
 echo Applying settings to BIG Cluster
+sleep 0.2
+chmod 0777 /sys/devices/system/cpu/cpu2/core_ctl/*
+echo "40" > /sys/devices/system/cpu/cpu2/core_ctl/busy_up_thres
+echo "35" > /sys/devices/system/cpu/cpu2/core_ctl/busy_down_thres
+echo 1 > /sys/devices/system/cpu/cpu2/core_ctl/min_cpus
+chmod 0644 /sys/devices/system/cpu/cpu2/core_ctl/*
+sleep 0.1
+chmod 0777 /sys/devices/system/cpu/cpu2/core_ctl/*
+echo "0" > /sys/devices/system/cpu/cpu2/core_ctl/busy_up_thres
+echo "0" > /sys/devices/system/cpu/cpu2/core_ctl/busy_down_thres
+echo 2 > /sys/devices/system/cpu/cpu2/core_ctl/min_cpus
+chmod 0644 /sys/devices/system/cpu/cpu2/core_ctl/*
 #Temporarily change permissions to governor files for the LITTLE cluster to enable Interactive governor
 chmod 644 /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
 echo interactive > /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
@@ -162,7 +174,7 @@ if [ -e "/sys/module/msm_thermal/core_control/enabled" ]; then
 echo 1 > /sys/module/msm_thermal/core_control/enabled
 fi
 if [ -e "/sys/module/msm_thermal/parameters/enabled" ]; then
-echo Y > /sys/module/msm_thermal/parameters/enabled
+echo N > /sys/module/msm_thermal/parameters/enabled
 fi
 #Tweak HMP Scheduler to feed the Big cluster more tasks
 sleep 0.2
