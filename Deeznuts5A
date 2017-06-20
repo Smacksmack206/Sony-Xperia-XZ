@@ -45,6 +45,17 @@ sleep 0.1
 #Apply settings to LITTLE cluster
 echo Applying settings to LITTLE Cluster...
 sleep 0.2
+chmod 0777 /sys/devices/system/cpu/cpu2/core_ctl/*
+echo "40" > /sys/devices/system/cpu/cpu2/core_ctl/busy_up_thres
+echo "35" > /sys/devices/system/cpu/cpu2/core_ctl/busy_down_thres
+echo 1 > /sys/devices/system/cpu/cpu2/core_ctl/min_cpus
+chmod 0644 /sys/devices/system/cpu/cpu2/core_ctl/*
+sleep 0.1
+chmod 0777 /sys/devices/system/cpu/cpu2/core_ctl/*
+echo "0" > /sys/devices/system/cpu/cpu2/core_ctl/busy_up_thres
+echo "0" > /sys/devices/system/cpu/cpu2/core_ctl/busy_down_thres
+echo 2 > /sys/devices/system/cpu/cpu2/core_ctl/min_cpus
+chmod 0644 /sys/devices/system/cpu/cpu2/core_ctl/*
 #Temporarily change permissions to governor files for the LITTLE cluster to enable Interactive governor
 chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 echo interactive > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
@@ -148,7 +159,7 @@ fi
 #Enable Core Control and Disable MSM Thermal Throttling allowing for longer sustained performance
 echo Disabling Aggressive CPU Thermal Throttling
 if [ -e "/sys/module/msm_thermal/core_control/enabled" ]; then
-echo 0 > /sys/module/msm_thermal/core_control/enabled
+echo 1 > /sys/module/msm_thermal/core_control/enabled
 fi
 if [ -e "/sys/module/msm_thermal/parameters/enabled" ]; then
 echo Y > /sys/module/msm_thermal/parameters/enabled
