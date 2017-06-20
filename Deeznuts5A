@@ -45,17 +45,17 @@ sleep 0.1
 #Apply settings to LITTLE cluster
 echo Applying settings to LITTLE Cluster...
 sleep 0.2
-chmod 0777 /sys/devices/system/cpu/cpu2/core_ctl/*
-echo "40" > /sys/devices/system/cpu/cpu2/core_ctl/busy_up_thres
-echo "35" > /sys/devices/system/cpu/cpu2/core_ctl/busy_down_thres
-echo 1 > /sys/devices/system/cpu/cpu2/core_ctl/min_cpus
-chmod 0644 /sys/devices/system/cpu/cpu2/core_ctl/*
+chmod 0777 /sys/devices/system/cpu/cpu0/core_ctl/*
+echo "40" > /sys/devices/system/cpu/cpu0/core_ctl/busy_up_thres
+echo "35" > /sys/devices/system/cpu/cpu0/core_ctl/busy_down_thres
+echo 1 > /sys/devices/system/cpu/cpu0/core_ctl/min_cpus
+chmod 0644 /sys/devices/system/cpu/cpu0/core_ctl/*
 sleep 0.1
-chmod 0777 /sys/devices/system/cpu/cpu2/core_ctl/*
-echo "0" > /sys/devices/system/cpu/cpu2/core_ctl/busy_up_thres
-echo "0" > /sys/devices/system/cpu/cpu2/core_ctl/busy_down_thres
-echo 2 > /sys/devices/system/cpu/cpu2/core_ctl/min_cpus
-chmod 0644 /sys/devices/system/cpu/cpu2/core_ctl/*
+chmod 0777 /sys/devices/system/cpu/cpu0/core_ctl/*
+echo "0" > /sys/devices/system/cpu/cpu0/core_ctl/busy_up_thres
+echo "0" > /sys/devices/system/cpu/cpu0/core_ctl/busy_down_thres
+echo 2 > /sys/devices/system/cpu/cpu0/core_ctl/min_cpus
+chmod 0644 /sys/devices/system/cpu/cpu0/core_ctl/*
 #Temporarily change permissions to governor files for the LITTLE cluster to enable Interactive governor
 chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 echo interactive > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
@@ -98,6 +98,18 @@ if [ -e "/sys/devices/system/cpu/cpu0/cpufreq/interactive/enable_prediction" ]; 
 fi
 #Apply settings to Big cluster
 echo Applying settings to BIG Cluster
+sleep 0.2
+chmod 0777 /sys/devices/system/cpu/cpu2/core_ctl/*
+echo "40" > /sys/devices/system/cpu/cpu2/core_ctl/busy_up_thres
+echo "35" > /sys/devices/system/cpu/cpu2/core_ctl/busy_down_thres
+echo 1 > /sys/devices/system/cpu/cpu2/core_ctl/min_cpus
+chmod 0644 /sys/devices/system/cpu/cpu2/core_ctl/*
+sleep 0.1
+chmod 0777 /sys/devices/system/cpu/cpu2/core_ctl/*
+echo "0" > /sys/devices/system/cpu/cpu2/core_ctl/busy_up_thres
+echo "0" > /sys/devices/system/cpu/cpu2/core_ctl/busy_down_thres
+echo 2 > /sys/devices/system/cpu/cpu2/core_ctl/min_cpus
+chmod 0644 /sys/devices/system/cpu/cpu2/core_ctl/*
 #Temporarily change permissions to governor files for the LITTLE cluster to enable Interactive governor
 chmod 644 /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
 echo interactive > /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
