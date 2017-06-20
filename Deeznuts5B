@@ -220,9 +220,22 @@ fi
 echo "=========================================="
 echo Tweaking other various Settings
 
-
-
-
+echo Applying google service fix..this might take a few secs
+#Google service drain fix
+find /data/data/*/cache/ -depth -mindepth 1 -exec rm -Rf {} \;
+find /data/data/*/*/cache/ -depth -mindepth 1 -exec rm -Rf {} \;
+find /data/data/*/*/*/*/cache/ -depth -mindepth 1 -exec rm -Rf {} \;
+rm -Rf /data/data/com.facebook.katana/files/video-cache/*
+su -c "pm enable com.google.android.gms/.update.SystemUpdateActivity"
+su -c "pm enable com.google.android.gms/.update.SystemUpdateService"
+su -c "pm enable com.google.android.gms/.update.SystemUpdateService$ActiveReceiver"
+su -c "pm enable com.google.android.gms/.update.SystemUpdateService$Receiver"
+su -c "pm enable com.google.android.gms/.update.SystemUpdateService$SecretCodeReceiver"
+su -c "pm enable com.google.android.gsf/.update.SystemUpdateActivity"
+su -c "pm enable com.google.android.gsf/.update.SystemUpdatePanoActivity"
+su -c "pm enable com.google.android.gsf/.update.SystemUpdateService"
+su -c "pm enable com.google.android.gsf/.update.SystemUpdateService$Receiver"
+su -c "pm enable com.google.android.gsf/.update.SystemUpdateService$SecretCodeReceiver"
 
 echo ·Memory Values
 echo '0' > /proc/sys/vm/laptop_mode
