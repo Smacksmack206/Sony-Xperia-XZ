@@ -4,7 +4,7 @@
 #Device: Xperia XZ
 #Codename: Deeznuts
 #Build Status: Stable
-#Last Updated: 6/20/2017
+#Last Updated: 6/22/2017
 #Notes: THIS IS THE BEST THUS FAR
 #TWEAKS_BEGIN
 echo ""
@@ -14,14 +14,14 @@ echo this governor has standed the test of time
 echo can get up to 14 hrs SOT
 echo '*************************'
 echo ------------------------------------------------------------
-echo Applying 'Deeznuts'
+echo Applying 'DEEZNUTS'
 echo Advanced Kernel Settings
 echo ------------------------------------------------------------
 echo Settings By: smacksmack206
 echo "Device: Xperia XZ"
 echo Codename: 'Deeznuts'
-echo Build Status: 5.BETA
-echo Last Updated: 6/20/2017
+echo Build Status: 6.BETA
+echo Last Updated: 6/22/2017
 echo 
 echo ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 echo Checking Android version...
@@ -284,9 +284,6 @@ else
 	echo cubic > /proc/sys/net/ipv4/tcp_congestion_control 
 fi
 
-
-
-
 if [ -e "/sys/module/adreno_idler" ]; then
 	echo 'Y' > /sys/module/adreno_idler/parameters/adreno_idler_active
 	echo'10000' > /sys/module/adreno_idler/parameters/adreno_idler_idleworkload
@@ -308,9 +305,22 @@ if [ -e "/sys/module/lazyplug" ]; then
 else
 	echo ' Your Kernel Does not support Lazyplug '
 fi
+
+echo Applying FS-TRIM
+FS_LOGFILE=/data/fstrim.log
+
+echo "fstrim started at $( date +"%m-%d-%Y %H:%M:%S" )" | tee -a $FS_LOGFILE;
+
+fstrim -v /cache | tee -a $FS_LOGFILE;
+fstrim -v /data | tee -a $FS_LOGFILE;
+
+
+echo "fstrim finished at $( date +"%m-%d-%Y %H:%M:%S" )" | tee -a $FS_LOGFILE;
+
+
 echo ------------------------------------------------------------
-echo 'Deeznuts' Successfully Applied!
-echo "Deeznuts" > /data/system/current_profile
+echo 'DEEZNUTS' Successfully Applied!
+echo "DEEZNUTS" > /data/system/current_profile
 echo   You may now tweak them further
 echo    using EXKM or Kernel Adiutor
 echo ------------------------------------------------------------
