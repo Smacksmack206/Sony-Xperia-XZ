@@ -247,8 +247,8 @@ echo '65' > /proc/sys/vm/overcommit_ratio
 echo '85' > /proc/sys/vm/vfs_cache_pressure
 echo '20' > /proc/sys/vm/dirty_ratio
 echo '10' > /proc/sys/vm/dirty_background_ratio
-echo '2000' > /proc/sys/vm/dirty_expire_centisecs
-echo '3000' > /proc/sys/vm/dirty_writeback_centisecs
+echo '500' > /proc/sys/vm/dirty_expire_centisecs
+echo '1500' > /proc/sys/vm/dirty_writeback_centisecs
 echo "8" > /proc/sys/vm/page-cluster;
 echo "64000" > /proc/sys/kernel/msgmni;
 echo "64000" > /proc/sys/kernel/msgmax;
@@ -261,7 +261,8 @@ echo noop > /sys/block/mmcblk0/queue/scheduler
 echo noop >/sys/block/mmcblk1/queue/scheduler
 echo 2048 > /sys/block/mmcblk0/bdi/read_ahead_kb
 echo 2048 > /sys/block/mmcblk0rpmb/bdi/read_ahead_kb
-
+echo 0 >/sys/block/mmcblk0/queue/rotational 
+ 
 if [ -e "/sys/module/lowmemorykiller/parameters/enable_adaptive_lmk" ]; then
 chmod 666 /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
 chown root /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
@@ -318,9 +319,14 @@ echo "fstrim started at $( date +"%m-%d-%Y %H:%M:%S" )" | tee -a $FS_LOGFILE;
 fstrim -v /cache | tee -a $FS_LOGFILE;
 fstrim -v /data | tee -a $FS_LOGFILE;
 
-
 echo "fstrim finished at $( date +"%m-%d-%Y %H:%M:%S" )" | tee -a $FS_LOGFILE;
 
+echo Disabling all wakelocks for a more Nutted effect
+echo 0 >/sys/module/wakeup/parameters/enable_msm_hsic_ws
+echo 0 >/sys/module/wakeup/parameters/enable_si_ws
+echo 0 >/sys/module/wakeup/parameters/wlan_ctrl_wake
+echo 0 >/sys/module/wakeup/parameters/wlan_rx_wake
+echo 0 >/sys/module/wakeup/parameters/wlan_wake
 
 echo ------------------------------------------------------------
 echo 'DEEZNUTS' Successfully Applied!
