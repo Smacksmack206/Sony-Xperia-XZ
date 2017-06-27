@@ -3,12 +3,11 @@
 #This program is free software; you can redistribute it and/or modify #it under the terms of the GNU General Public License version 2 and #only version 2 as published by the Free Software Foundation. 
 #This program is distributed in the hope that it will be useful,
 #but WITHOUT ANY WARRANTY; without even the implied warranty #of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #See the GNU General Public License for more details.
-
 #Settings By: Smacksmack206
 #Device: Xperia XZ
 #Codename: Deeznuts
 #Build Status: Stable
-#Last Updated: 6/22/2017
+#Last Updated: 6/25/2017
 #Notes: THIS IS THE BEST THUS FAR
 #TWEAKS_BEGIN
 echo ""
@@ -25,7 +24,7 @@ echo Settings By: smacksmack206
 echo "Device: Xperia XZ"
 echo Codename: 'Deeznuts'
 echo Build Status: 6.BETA
-echo Last Updated: 6/22/2017
+echo Last Updated: 6/25/2017
 echo 
 echo ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 echo Checking Android version...
@@ -72,21 +71,15 @@ chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
 echo 1593600 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq     #Core 0 Maximum Frequency = 1593MHz         
 chmod 444 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
 chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
-echo 98 307200:99 480000:56 556800:70 652800:70 729600:99 844800:00 960000:99 1036800:00 1228800:99 1593600:99 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads 
+echo 98 307200:99 480000:56 556800:70 652800:70 729600:99 844800:00 960000:79 1036800:00 1228800:99 1478400:999 1593600:30 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads 
 chmod 444 /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
-
-
-#Duality Kernel and Androplus will no longer support oc
-#in favour of Energy Aware Scheduler
-#EAS will not play nice with overclocking 
-
 chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/*
 echo 145000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack
 echo 307200 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
-echo 86666 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate
-echo 90 307200:990 480000:99 729600:99 844800:90 960000:99 1036800:00 1228800:99 1478400:00 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
+echo 77750 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate
+echo 90 307200:90 480000:99 729600:99 844800:90 960000:99 1036800:00 1228800:99 1478400:50 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
 echo 155 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load
-echo 24000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
+echo 25000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
 echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/max_freq_hysteresis
 echo 1 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/ignore_hispeed_on_notif
 echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/boost
@@ -126,14 +119,14 @@ chmod 644 /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq
 echo 2150400 > /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq     #Core 2 Maximum Frequency = 2150MHz         
 chmod 444 /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq
 chmod 644 /sys/devices/system/cpu/cpu2/cpufreq/interactive/target_loads
-echo 05 307200:99 729600:96 844800:99 940800:99 1036800:96 1401600:999 1824000:97 2150400:00 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/target_loads 
+echo 05 307200:99 729600:96 844800:99 940800:99 1036800:96 1401600:99 1824000:97 2150400:00 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/target_loads 
 chmod 444 /sys/devices/system/cpu/cpu2/cpufreq/interactive/target_loads
 chmod 644 /sys/devices/system/cpu/cpu2/cpufreq/interactive/*
 #Tweak Interactive Governor
 echo 160000 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/timer_slack
 echo 307200 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/hispeed_freq
 echo 110000 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/timer_rate
-echo 35000 307200:99 729600:90 940800:99 1113600:99 1248000:999 1401600:00 1632000:00 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/above_hispeed_delay
+echo 35000 307200:99 729600:90 940800:99 1113600:99 1248000:99 1401600:90 1555200:999 1632000:00 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/above_hispeed_delay
 echo 400 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/go_hispeed_load
 echo 0 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/min_sample_time
 echo 0 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/max_freq_hysteresis
@@ -149,7 +142,6 @@ if [ -e "/sys/devices/system/cpu/cpu2/cpufreq/interactive/enable_prediction" ]; 
     chmod 644 /sys/devices/system/cpu/cpu2/cpufreq/interactive/enable_prediction
     echo 0 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/enable_prediction
 fi
-
 #Disable InputBoost
 echo Disabling InputBoost
   if [ -e "/sys/module/cpu_boost/parameters/input_boost_freq" ]; then
@@ -158,7 +150,6 @@ echo Disabling InputBoost
 else
     echo "*Not supported for your current Kernel*"
 fi
-
 #Disable TouchBoost
 echo Disabling TouchBoost
     if [ -e "/sys/module/msm_performance/parameters/touchboost" ]; then
@@ -189,6 +180,9 @@ echo 65 > /proc/sys/kernel/sched_downmigrate
 echo 7 > /proc/sys/kernel/sched_spill_nr_run
 echo 97 > /proc/sys/kernel/sched_spill_load
 echo 30 > /proc/sys/kernel/sched_init_task_load
+echo 200000 > /proc/sys/kernel/sched_min_granularity_ns
+echo 400000 > /proc/sys/kernel/sched_latency_ns
+echo 100000 > /proc/sys/kernel/sched_wakeup_granularity_ns
 if [ -e "/proc/sys/kernel/sched_heavy_task" ]; then
     echo 96 > /proc/sys/kernel/sched_heavy_task
 fi
@@ -223,7 +217,6 @@ fi
 #Tweaks for other various Settings
 echo "=========================================="
 echo Tweaking other various Settings
-
 echo Applying google service fix..this might take a few secs
 #Google service drain fix
 find /data/data/*/cache/ -depth -mindepth 1 -exec rm -Rf {} \;
@@ -240,7 +233,6 @@ su -c "pm enable com.google.android.gsf/.update.SystemUpdatePanoActivity"
 su -c "pm enable com.google.android.gsf/.update.SystemUpdateService"
 su -c "pm enable com.google.android.gsf/.update.SystemUpdateService$Receiver"
 su -c "pm enable com.google.android.gsf/.update.SystemUpdateService$SecretCodeReceiver"
-
 echo ·Memory Values
 echo '0' > /proc/sys/vm/laptop_mode
 echo '65' > /proc/sys/vm/overcommit_ratio
@@ -254,15 +246,13 @@ echo "64000" > /proc/sys/kernel/msgmni;
 echo "64000" > /proc/sys/kernel/msgmax;
 echo "10" > /proc/sys/fs/lease-break-time;
 echo "500,512000,64,2048" > /proc/sys/kernel/sem
-
-
+echo $((1024*1024*64)) >  /sys/block/zram0/disksize
 echo Applying I/O Scheduler
 echo noop > /sys/block/mmcblk0/queue/scheduler
 echo noop >/sys/block/mmcblk1/queue/scheduler
 echo 2048 > /sys/block/mmcblk0/bdi/read_ahead_kb
 echo 2048 > /sys/block/mmcblk0rpmb/bdi/read_ahead_kb
 echo 0 >/sys/block/mmcblk0/queue/rotational 
- 
 if [ -e "/sys/module/lowmemorykiller/parameters/enable_adaptive_lmk" ]; then
 chmod 666 /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
 chown root /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
@@ -278,7 +268,6 @@ if [ -e "/sys/module/lowmemorykiller/parameters/minfree" ]; then
 else
 	echo ' *LMK cannot currently be modified on your Kernel* '
 fi
-
 echo ·TCP Values
 string=$(</proc/sys/net/ipv4/tcp_available_congestion_control);
 if [[ $string == *"westwood"* ]]
@@ -288,20 +277,17 @@ else
 	echo Westwood not avilable, using Cubic
 	echo cubic > /proc/sys/net/ipv4/tcp_congestion_control 
 fi
-
 if [ -e "/sys/module/adreno_idler" ]; then
 	echo 'Y' > /sys/module/adreno_idler/parameters/adreno_idler_active
 	echo'10000' > /sys/module/adreno_idler/parameters/adreno_idler_idleworkload
 else
 	echo ' Your Kernel Does not support Adreno IDLER '
 fi
-
 #Tweaking GPU
 sleep 0.1
 echo GPU Tweaking
 echo simple_ondemand > /sys/devices/soc/b00000.qcom,kgsl-3d0/devfreq/b00000.qcom,kgsl-3d0/governor
-echo 315000000 > /sys/devices/soc/b00000.qcom,kgsl-3d0/devfreq/b00000.qcom,kgsl-3d0/max_freq
-
+echo 560000000 > /sys/devices/soc/b00000.qcom,kgsl-3d0/devfreq/b00000.qcom,kgsl-3d0/max_freq
 #Tune Lazyplug	
 if [ -e "/sys/module/lazyplug" ]; then
 	echo '1250' > /sys/module/lazyplug/parameters/cpu_nr_run_theshold
@@ -310,24 +296,18 @@ if [ -e "/sys/module/lazyplug" ]; then
 else
 	echo ' Your Kernel Does not support Lazyplug '
 fi
-
 echo Applying FS-TRIM
 FS_LOGFILE=/data/fstrim.log
-
 echo "fstrim started at $( date +"%m-%d-%Y %H:%M:%S" )" | tee -a $FS_LOGFILE;
-
 fstrim -v /cache | tee -a $FS_LOGFILE;
 fstrim -v /data | tee -a $FS_LOGFILE;
-
 echo "fstrim finished at $( date +"%m-%d-%Y %H:%M:%S" )" | tee -a $FS_LOGFILE;
-
 echo Disabling all wakelocks for a more Nutted effect
 echo 0 >/sys/module/wakeup/parameters/enable_msm_hsic_ws
 echo 0 >/sys/module/wakeup/parameters/enable_si_ws
 echo 0 >/sys/module/wakeup/parameters/wlan_ctrl_wake
 echo 0 >/sys/module/wakeup/parameters/wlan_rx_wake
 echo 0 >/sys/module/wakeup/parameters/wlan_wake
-
 echo ------------------------------------------------------------
 echo 'DEEZNUTS' Successfully Applied!
 echo "DEEZNUTS" > /data/system/current_profile
