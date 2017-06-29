@@ -125,7 +125,7 @@ chmod 644 /sys/devices/system/cpu/cpu2/cpufreq/interactive/*
 echo 12000 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/timer_slack
 echo 307200 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/hispeed_freq
 echo 11000 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/timer_rate
-echo 35000 307200:79 729600:80 940800:99 1113600:99 1248000:96 1401600:97 1555200:99 1632000:88> /sys/devices/system/cpu/cpu2/cpufreq/interactive/above_hispeed_delay
+echo 35000 307200:79 729600:80 940800:99 1113600:01 1248000:07 1401600:07 1555200:09 1632000:08> /sys/devices/system/cpu/cpu2/cpufreq/interactive/above_hispeed_delay
 echo 300 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/go_hispeed_load
 echo 0 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/min_sample_time
 echo 0 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/max_freq_hysteresis
