@@ -59,6 +59,8 @@ echo "0" > /sys/devices/system/cpu/cpu0/core_ctl/busy_up_thres
 echo "0" > /sys/devices/system/cpu/cpu0/core_ctl/busy_down_thres
 echo 2 > /sys/devices/system/cpu/cpu0/core_ctl/min_cpus
 chmod 0644 /sys/devices/system/cpu/cpu0/core_ctl/*
+echo Quickening Boot Time
+setprop ro.config.hw_quickpoweron true
 #Temporarily change permissions to governor files for the LITTLE cluster to enable Interactive governor
 chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 echo interactive > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
@@ -72,7 +74,7 @@ echo 1593600 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq #Core 0 Max
 chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/*
 echo 9999 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack
 echo 307200 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
-echo 17770 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate
+echo 19070 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate
 chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
 echo 98 307200:99 480000:36 556800:40 652800:50 729600:99 844800:01 960000:79 1036800:01 1228800:99 1478400:02 1593600:00 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads 
 chmod 444 /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
@@ -230,6 +232,9 @@ echo "64000" > /proc/sys/kernel/msgmax;
 echo "10" > /proc/sys/fs/lease-break-time;
 echo "500,512000,64,2048" > /proc/sys/kernel/sem
 echo $((1024*1024*64)) >  /sys/block/zram0/disksize
+echo Applying New Scrolling Values
+setprop ro.max.fling_velocity 13500 
+setprop ro.min.fling_velocity 10000
 echo Applying I/O Scheduler
 echo noop > /sys/block/mmcblk0/queue/scheduler
 echo noop >/sys/block/mmcblk1/queue/scheduler
@@ -239,6 +244,15 @@ echo 0 >/sys/block/mmcblk0/queue/rotational
 echo '896' > /proc/sys/kernel/random/write_wakeup_threshold 
 echo '86' > /proc/sys/kernel/random/read_wakeup_threshold
 echo pwr_dbg > /sys/power/wake_lock
+echo Applying Battery Props
+setprop power.saving.mode 1 
+setprop ro.config.hw_power_saving 1 
+setprop ro.config.hw_power_saving true 
+setprop persist.radio.add_power_save 1
+echo Kill GMS
+busybox killall -9 com.google.android.gms 
+busybox killall -9 com.google.android.gms.persistent 
+busybox killall -9 com.google.process.gapps 
 echo Enable Low Power Mode values
 echo N > /sys/module/lpm_levels/system/pwr/cpu0/fpc-def/idle_enabled 		
 echo N > /sys/module/lpm_levels/system/pwr/cpu1/fpc-def/idle_enabled 		
@@ -254,10 +268,12 @@ echo 50 >/sys/class/devfreq/soc:qcom,memlat-cpu0/polling_interval
 echo "mem_latency" >/sys/class/devfreq/soc:qcom,memlat-cpu2/governor 
 echo 50 >/sys/class/devfreq/soc:qcom,memlat-cpu2/polling_interval 
 echo "cpufreq" >/sys/class/devfreq/soc:qcom,mincpubw/governor 
+busybox chmod 644 /sys/module/lowmemorykiller/parameters/debug_level 
+busybox echo '0' > /sys/module/lowmemorykiller/parameters/debug_level 
 if [ -e "/sys/module/lowmemorykiller/parameters/enable_adaptive_lmk" ]; then
 chmod 666 /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
 chown root /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
-echo 0 > /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
+echo 1 > /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
 fi
 if [ -e "/sys/module/lowmemorykiller/parameters/enable_adaptive_lmk" ]; then
 	echo 0 > /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
@@ -278,6 +294,11 @@ else
 	echo Westwood not avilable, using Cubic
 	echo cubic > /proc/sys/net/ipv4/tcp_congestion_control 
 fi
+echo Disabling Fast Dormancy
+setprop ro.fast.dormancy 0
+setprop ro.ril.fast.dormancy.rule 0
+echo Edit Wifi Sleeper
+sqlite=/system/xbin/sqlite3 wifi_idle_wait=30000 
 if [ -e "/sys/module/adreno_idler" ]; then
 	echo 'Y' > /sys/module/adreno_idler/parameters/adreno_idler_active
 	echo'10000' > /sys/module/adreno_idler/parameters/adreno_idler_idleworkload
@@ -336,6 +357,7 @@ su -c "pm enable com.google.android.gsf/.update.SystemUpdatePanoActivity"
 su -c "pm enable com.google.android.gsf/.update.SystemUpdateService"
 su -c "pm enable com.google.android.gsf/.update.SystemUpdateService$Receiver"
 su -c "pm enable com.google.android.gsf/.update.SystemUpdateService$SecretCodeReceiver"
+setprop ro.com.google.networklocation 0
 echo ------------------------------------------------------------
 echo 'DEEZNUTS' Successfully Applied!
 echo "DEEZNUTS" > /data/system/current_profile
