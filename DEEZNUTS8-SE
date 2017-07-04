@@ -74,10 +74,8 @@ echo 1593600 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq #Core 0 Max
 chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/*
 echo 9999 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack
 echo 307200 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
-echo 19070 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate
-chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
+echo 7770 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate
 echo 98 307200:99 480000:36 556800:40 652800:50 729600:99 844800:01 960000:79 1036800:01 1228800:99 1478400:02 1593600:00 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads 
-chmod 444 /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
 echo 90 307200:90 480000:89 729600:99 844800:10 960000:9999999 1036800:05 1228800:09 1478400:00 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
 echo 01 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load
 echo 200 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
@@ -94,6 +92,8 @@ if [ -e "/sys/devices/system/cpu/cpu0/cpufreq/interactive/enable_prediction" ]; 
 chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/enable_prediction
 echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/enable_prediction
 fi
+
+
 #Apply settings to Big cluster
 echo Applying settings to BIG Cluster
 sleep 0.2
@@ -119,7 +119,6 @@ echo Applying appropriate values.
 chmod 644 /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq
 echo 2150400 > /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq #Core 2 Maximum Frequency = 2150MHz 
 chmod 444 /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq
-chmod 644 /sys/devices/system/cpu/cpu2/cpufreq/interactive/target_loads
 echo 05 307200:99 729600:96 844800:99 940800:99 1036800:03 1401600:19 1824000:07 2150400:00 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/target_loads 
 chmod 444 /sys/devices/system/cpu/cpu2/cpufreq/interactive/target_loads
 chmod 644 /sys/devices/system/cpu/cpu2/cpufreq/interactive/*
