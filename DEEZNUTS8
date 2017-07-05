@@ -238,7 +238,7 @@ echo 2048 > /sys/block/mmcblk0rpmb/bdi/read_ahead_kb
 echo 0 >/sys/block/mmcblk0/queue/rotational 
 echo '896' > /proc/sys/kernel/random/write_wakeup_threshold 
 echo '86' > /proc/sys/kernel/random/read_wakeup_threshold
-echo pwr_dbg > /sys/power/wake_lock
+echo pwr_dbg > /sys/power
 echo Enable Low Power Mode values
 echo N > /sys/module/lpm_levels/system/pwr/cpu0/fpc-def/idle_enabled 		
 echo N > /sys/module/lpm_levels/system/pwr/cpu1/fpc-def/idle_enabled 		
