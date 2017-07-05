@@ -92,8 +92,6 @@ if [ -e "/sys/devices/system/cpu/cpu0/cpufreq/interactive/enable_prediction" ]; 
 chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/enable_prediction
 echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/enable_prediction
 fi
-
-
 #Apply settings to Big cluster
 echo Applying settings to BIG Cluster
 sleep 0.2
@@ -242,7 +240,6 @@ echo 2048 > /sys/block/mmcblk0rpmb/bdi/read_ahead_kb
 echo 0 >/sys/block/mmcblk0/queue/rotational 
 echo '896' > /proc/sys/kernel/random/write_wakeup_threshold 
 echo '86' > /proc/sys/kernel/random/read_wakeup_threshold
-echo pwr_dbg > /sys/power/wake_lock
 echo Applying Battery Props
 setprop power.saving.mode 1 
 setprop ro.config.hw_power_saving 1 
