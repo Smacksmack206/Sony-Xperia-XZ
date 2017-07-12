@@ -274,7 +274,7 @@ chown root /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
 echo 1 > /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
 fi
 if [ -e "/sys/module/lowmemorykiller/parameters/enable_adaptive_lmk" ]; then
-	echo 0 > /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
+	echo 1 > /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
 else
 	echo ' *Adaptive LMK is not present on your Kernel* '
 fi
