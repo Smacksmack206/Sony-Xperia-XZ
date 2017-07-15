@@ -7,7 +7,7 @@
 #Device: Xperia XZ
 #Codename: Deeznuts
 #Build Status: Stable
-#Last Updated: 7/2/2017
+#Last Updated: 7/15/2017
 #Notes: THIS IS THE BEST THUS FAR
 #TWEAKS_BEGIN
 echo ""
@@ -23,8 +23,8 @@ echo ------------------------------------------------------------
 echo Settings By: smacksmack206
 echo "Device: Xperia XZ"
 echo Codename: 'Deeznuts'
-echo Build Status: Version 8
-echo Last Updated: 7/1/2017
+echo Build Status: Version 8 SPECIAL EDITION
+echo Last Updated: 7/15/2017
 echo 
 echo ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 echo Checking Android version...
