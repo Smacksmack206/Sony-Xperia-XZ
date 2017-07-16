@@ -70,7 +70,7 @@ echo Applying appropriate values.
 chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
 echo 1593600 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq     #Core 0 Maximum Frequency = 1593MHz         
 chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/*
-echo 8999 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack
+echo 5099 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack
 echo 307200 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
 echo 9750 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate
 chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
@@ -78,7 +78,7 @@ echo 98 307200:99 480000:56 556800:70 652800:70 729600:99 844800:01 960000:79 10
 chmod 444 /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
 echo 90 307200:90 480000:89 729600:99 844800:10 960000:99 1036800:01 1228800:03 1478400:00 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
 echo 80 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load
-echo 17500 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
+echo 30500 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
 echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/max_freq_hysteresis
 echo 1 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/ignore_hispeed_on_notif
 echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/boost
@@ -239,8 +239,8 @@ echo sio >/sys/block/mmcblk1/queue/scheduler
 echo 2048 > /sys/block/mmcblk0/bdi/read_ahead_kb
 echo 2048 > /sys/block/mmcblk0rpmb/bdi/read_ahead_kb
 echo 0 >/sys/block/mmcblk0/queue/rotational 
-echo '0' > /proc/sys/kernel/random/write_wakeup_threshold 
-echo '0' > /proc/sys/kernel/random/read_wakeup_threshold
+echo '200' > /proc/sys/kernel/random/write_wakeup_threshold 
+echo '200' > /proc/sys/kernel/random/read_wakeup_threshold
 echo Applying Battery Props
 setprop power.saving.mode 1 
 setprop ro.config.hw_power_saving 1 
