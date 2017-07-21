@@ -85,9 +85,21 @@ fi
 if [ -e "/sys/module/msm_thermal/parameters/enabled" ]; then
 echo N > /sys/module/msm_thermal/parameters/enabled
 fi
-echo Tuning EAS 
+echo Tuning Energy Aware Scheduler 
 echo -50 > /dev/stune/schedtune.boost
 echo -50 > /dev/stune/foreground/schedtune.boost
+echo Applying EAS POWERHAL : VOX POPUILI
+echo 1 > /dev/voxpopuli/enable_interaction_boost
+Echo Tuning POWERHAL
+echo 10 > /dev/voxpopuli/fling_boost_topapp
+echo 2500 > /dev/voxpopuli/fling_max_boost_duration
+echo 200 > /dev/voxpopuli/fling_min_boost_duration
+echo 307 > /dev/voxpopuli/fling_min_freq_big
+echo 307 > /dev/voxpopuli/fling_min_freq_little
+echo 200 > /dev/voxpopuli/touch_boost_duration
+echo 10 > /dev/voxpopuli/touch_boost_topapp
+echo 307 > /dev/voxpopuli/touch_min_freq_big
+echo 307 > /dev/voxpopuli/touch_min_freq_little
 #Tweaks for other various Settings
 echo "=========================================="
 echo Tweaking other various Settings
@@ -215,6 +227,7 @@ busybox killall -9 com.sonymobile.intellegent.backlight
 busybox killall -9 com.sonymobile.intellegent.iengine
 busybox killall -9 com.sonyericsson.lockscreen.uxpnxt
 busybox killall -9 org.telegram.messenger
+
 echo ------------------------------------------------------------
 echo 'DEEZNUTS' Successfully Applied!
 echo "DEEZNUTS" > /data/system/current_profile
