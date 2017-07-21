@@ -88,15 +88,27 @@ fi
 echo Tuning Energy Aware Scheduler 
 echo -100 > /dev/stune/schedtune.boost
 echo -100 > /dev/stune/foreground/schedtune.boost
+chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/schedutil/up_rate_limit_us
+echo 20000 > /sys/devices/system/cpu/cpu0/cpufreq/schedutil/up_rate_limit_us
+chmod 444 /sys/devices/system/cpu/cpu0/cpufreq/schedutil/up_rate_limit_us
+chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/schedutil/down_rate_limit_us
+echo 200 > /sys/devices/system/cpu/cpu0/cpufreq/schedutil/down_rate_limit_us
+chmod 444 /sys/devices/system/cpu/cpu0/cpufreq/schedutil/down_rate_limit_us
+chmod 644 /sys/devices/system/cpu/cpu2/cpufreq/schedutil/up_rate_limit_us
+echo 20000 > /sys/devices/system/cpu/cpu2/cpufreq/schedutil/up_rate_limit_us
+chmod 444 /sys/devices/system/cpu/cpu2/cpufreq/schedutil/up_rate_limit_us
+chmod 644 /sys/devices/system/cpu/cpu2/cpufreq/schedutil/down_rate_limit_us
+echo 200 > /sys/devices/system/cpu/cpu2/cpufreq/schedutil/down_rate_limit_us
+chmod 444 /sys/devices/system/cpu/cpu2/cpufreq/schedutil/down_rate_limit_us
 echo Applying EAS POWERHAL : VOX POPUILI
 echo 1 > /dev/voxpopuli/enable_interaction_boost
 Echo Tuning POWERHAL
-echo -95 > /dev/voxpopuli/fling_boost_topapp
-echo 2500 > /dev/voxpopuli/fling_max_boost_duration
-echo 50 > /dev/voxpopuli/fling_min_boost_duration
+echo -100 > /dev/voxpopuli/fling_boost_topapp
+echo 1 > /dev/voxpopuli/fling_max_boost_duration
+echo 1 > /dev/voxpopuli/fling_min_boost_duration
 echo 307 > /dev/voxpopuli/fling_min_freq_big
 echo 307 > /dev/voxpopuli/fling_min_freq_little
-echo 200 > /dev/voxpopuli/touch_boost_duration
+echo 1 > /dev/voxpopuli/touch_boost_duration
 echo -100 > /dev/voxpopuli/touch_boost_topapp
 echo 307 > /dev/voxpopuli/touch_min_freq_big
 echo 307 > /dev/voxpopuli/touch_min_freq_little
@@ -233,6 +245,5 @@ echo "DEEZNUTS" > /data/system/current_profile
 echo   You may now tweak them further
 echo    using EXKM or Kernel Adiutor
 echo ------------------------------------------------------------
-echo ""
 echo " Done, this will be automatically closed..."
 #################################################
