@@ -85,19 +85,13 @@ fi
 if [ -e "/sys/module/msm_thermal/parameters/enabled" ]; then
 echo N > /sys/module/msm_thermal/parameters/enabled
 fi
+echo Tuning EAS 
+echo -50 > /dev/stune/schedtune.boost
+echo -50 > /dev/stune/foreground/schedtune.boost
 #Tweaks for other various Settings
 echo "=========================================="
 echo Tweaking other various Settings
 echo ·Memory Values
-echo '0' > /proc/sys/vm/laptop_mode
-echo '65' > /proc/sys/vm/overcommit_ratio
-echo '85' > /proc/sys/vm/vfs_cache_pressure
-echo '20' > /proc/sys/vm/dirty_ratio
-echo '10' > /proc/sys/vm/dirty_background_ratio
-echo '500' > /proc/sys/vm/dirty_expire_centisecs
-echo '1500' > /proc/sys/vm/dirty_writeback_centisecs
-echo "8" > /proc/sys/vm/page-cluster
-echo "10" > /proc/sys/fs/lease-break-time
 echo $((1024*1024*64)) >  /sys/block/zram0/disksize
 echo Applying New Scrolling Values
 setprop ro.max.fling_velocity 13500 
