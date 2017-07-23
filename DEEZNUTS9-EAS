@@ -7,8 +7,8 @@
 #Device: Xperia XZ
 #Codename: Deeznuts
 #Build Status: Stable
-#Last Updated: 7/2/2017
-#Notes: THIS IS THE BEST THUS FAR
+#Last Updated: 7/23/2017
+#Notes: THIS IS THE BEST THUS FAR 
 #TWEAKS_BEGIN
 echo ""
 echo '*************************'
@@ -23,8 +23,8 @@ echo ------------------------------------------------------------
 echo Settings By: smacksmack206
 echo "Device: Xperia XZ"
 echo Codename: 'Deeznuts'
-echo Build Status: Version 8
-echo Last Updated: 7/1/2017
+echo Build Status: Version 9-EAS
+echo Last Updated: 7/23/2017
 echo 
 echo ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 echo Checking Android version...
@@ -77,7 +77,7 @@ echo Disabling BCL and Removing Perfd
 if [ -e "/sys/devices/soc/soc:qcom,bcl/mode" ]; then
 echo -n disable > /sys/devices/soc/soc:qcom,bcl/mode
 fi
-#Disable Core Control and Disable MSM Thermal Throttling allowing for longer sustained performance
+#Disabled Core Control and Disable MSM Thermal Throttling allowing for longer sustained performance
 echo Disabling Aggressive CPU Thermal Throttling
 if [ -e "/sys/module/msm_thermal/core_control/enabled" ]; then
 echo 0 > /sys/module/msm_thermal/core_control/enabled
@@ -87,29 +87,37 @@ echo N > /sys/module/msm_thermal/parameters/enabled
 fi
 echo Tuning Energy Aware Scheduler 
 echo -100 > /dev/stune/schedtune.boost
-echo -100 > /dev/stune/foreground/schedtune.boost
+echo -100 > /dev/stune/system-background/schedtune.boost
+chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/schedutil/iowait_boost_enable
+echo 1 > /sys/devices/system/cpu/cpu0/cpufreq/schedutil/iowait_boost_enable
+chmod 444 /sys/devices/system/cpu/cpu0/cpufreq/schedutil/iowait_boost_enable
+chmod 644 /sys/devices/system/cpu/cpu2/cpufreq/schedutil/iowait_boost_enable
+echo 1 > /sys/devices/system/cpu/cpu2/cpufreq/schedutil/iowait_boost_enable
+chmod 444 /sys/devices/system/cpu/cpu0/cpufreq/schedutil/iowait_boost_enable
+echo 2 > /proc/sys/kernel/sched_tunable_scaling
+echo 38 > /proc/sys/kernel/sched_walt_cpu_high_irqload
 chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/schedutil/up_rate_limit_us
-echo 20000 > /sys/devices/system/cpu/cpu0/cpufreq/schedutil/up_rate_limit_us
+echo 1000 > /sys/devices/system/cpu/cpu0/cpufreq/schedutil/up_rate_limit_us
 chmod 444 /sys/devices/system/cpu/cpu0/cpufreq/schedutil/up_rate_limit_us
 chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/schedutil/down_rate_limit_us
-echo 200 > /sys/devices/system/cpu/cpu0/cpufreq/schedutil/down_rate_limit_us
+echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/schedutil/down_rate_limit_us
 chmod 444 /sys/devices/system/cpu/cpu0/cpufreq/schedutil/down_rate_limit_us
 chmod 644 /sys/devices/system/cpu/cpu2/cpufreq/schedutil/up_rate_limit_us
-echo 20000 > /sys/devices/system/cpu/cpu2/cpufreq/schedutil/up_rate_limit_us
+echo 1000 > /sys/devices/system/cpu/cpu2/cpufreq/schedutil/up_rate_limit_us
 chmod 444 /sys/devices/system/cpu/cpu2/cpufreq/schedutil/up_rate_limit_us
 chmod 644 /sys/devices/system/cpu/cpu2/cpufreq/schedutil/down_rate_limit_us
-echo 200 > /sys/devices/system/cpu/cpu2/cpufreq/schedutil/down_rate_limit_us
+echo 0 > /sys/devices/system/cpu/cpu2/cpufreq/schedutil/down_rate_limit_us
 chmod 444 /sys/devices/system/cpu/cpu2/cpufreq/schedutil/down_rate_limit_us
 echo Applying EAS POWERHAL : VOX POPUILI
 echo 1 > /dev/voxpopuli/enable_interaction_boost
 Echo Tuning POWERHAL
-echo 1 > /dev/voxpopuli/fling_boost_topapp
+echo 0 > /dev/voxpopuli/fling_boost_topapp
 echo 1 > /dev/voxpopuli/fling_max_boost_duration
-echo 1 > /dev/voxpopuli/fling_min_boost_duration
+echo 0 > /dev/voxpopuli/fling_min_boost_duration
 echo 307 > /dev/voxpopuli/fling_min_freq_big
 echo 307 > /dev/voxpopuli/fling_min_freq_little
-echo 1 > /dev/voxpopuli/touch_boost_duration
-echo -100 > /dev/voxpopuli/touch_boost_topapp
+echo 0 > /dev/voxpopuli/touch_boost_duration
+echo 0 > /dev/voxpopuli/touch_boost_topapp
 echo 307 > /dev/voxpopuli/touch_min_freq_big
 echo 307 > /dev/voxpopuli/touch_min_freq_little
 #Tweaks for other various Settings
@@ -118,8 +126,8 @@ echo Tweaking other various Settings
 echo ·Memory Values
 echo $((1024*1024*64)) >  /sys/block/zram0/disksize
 echo Applying New Scrolling Values
-setprop ro.max.fling_velocity 13500 
-setprop ro.min.fling_velocity 10000
+setprop ro.max.fling_velocity 13800 
+setprop ro.min.fling_velocity 10500
 echo Applying I/O Scheduler
 echo maple > /sys/block/mmcblk0/queue/scheduler
 echo maple >/sys/block/mmcblk1/queue/scheduler
@@ -239,6 +247,43 @@ busybox killall -9 com.sonymobile.intellegent.backlight
 busybox killall -9 com.sonymobile.intellegent.iengine
 busybox killall -9 com.sonyericsson.lockscreen.uxpnxt
 busybox killall -9 org.telegram.messenger
+echo Disabling all wakelocks for a more Nutted effect
+chmod 644 /sys/module/wakeup/parameters/enable_si_ws
+echo 0 > /sys/module/wakeup/parameters/enable_si_ws
+chmod 444 /sys/module/wakeup/parameters/enable_si_ws
+chmod 644 /sys/module/wakeup/parameters/enable_bluedroid_timer_ws
+echo 0 > /sys/module/wakeup/parameters/enable_bluedroid_timer_ws
+chmod 444 /sys/module/wakeup/parameters/enable_bluedroid_timer_ws
+chmod 644 /sys/module/wakeup/parameters/enable_ipa_ws
+echo 0 > /sys/module/wakeup/parameters/enable_ipa_ws
+chmod 444 /sys/module/wakeup/parameters/enable_ipa_ws
+chmod 644 /sys/module/wakeup/parameters/enable_netlink_ws
+echo 0 > /sys/module/wakeup/parameters/enable_netlink_ws
+chmod 444 /sys/module/wakeup/parameters/enable_netlink_ws
+chmod 644 /sys/module/wakeup/parameters/enable_netmgr_wl_ws
+echo 0 > /sys/module/wakeup/parameters/enable_netmgr_wl_ws
+chmod 444 /sys/module/wakeup/parameters/enable_netmgr_wl_ws
+chmod 644 /sys/module/wakeup/parameters/enable_qcom_rx_wakelock_ws
+echo 0 > /sys/module/wakeup/parameters/enable_qcom_rx_wakelock_ws
+chmod 444 /sys/module/wakeup/parameters/enable_qcom_rx_wakelock_ws
+chmod 644 /sys/module/wakeup/parameters/enable_timerfd_ws
+echo 0 > /sys/module/wakeup/parameters/enable_timerfd_ws
+chmod 444 /sys/module/wakeup/parameters/enable_timerfd_ws
+chmod 644 /sys/module/wakeup/parameters/enable_wlan_extscan_wl_ws
+echo 0 > /sys/module/wakeup/parameters/enable_wlan_extscan_wl_ws
+chmod 444 /sys/module/wakeup/parameters/enable_wlan_extscan_wl_ws
+chmod 644 /sys/module/wakeup/parameters/enable_wlan_rx_wake_ws
+echo 0 > /sys/module/wakeup/parameters/enable_wlan_rx_wake_ws
+chmod 444 /sys/module/wakeup/parameters/enable_wlan_rx_wake_ws
+chmod 644 /sys/module/wakeup/parameters/enable_wlan_wake_ws
+echo 0 > /sys/module/wakeup/parameters/enable_wlan_wake_ws
+chmod 444 /sys/module/wakeup/parameters/enable_wlan_wake_ws
+chmod 644 /sys/module/wakeup/parameters/enable_wlan_wow_wl_ws
+echo 0 > /sys/module/wakeup/parameters/enable_wlan_wow_wl_ws
+chmod 444 /sys/module/wakeup/parameters/enable_wlan_wow_wl_ws
+chmod 644 /sys/module/wakeup/parameters/enable_wlan_ws
+echo 0 > /sys/module/wakeup/parameters/enable_wlan_ws
+chmod 444 /sys/module/wakeup/parameters/enable_wlan_ws
 echo ------------------------------------------------------------
 echo 'DEEZNUTS' Successfully Applied!
 echo "DEEZNUTS" > /data/system/current_profile
