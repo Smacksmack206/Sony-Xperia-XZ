@@ -47,7 +47,7 @@ if grep -q 'ro.build.version.sdk=23' /system/build.prop; then
 	sleep 0.1
 	echo "MM detected... Applying proper settings"
 fi
-echo ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 #Apply settings to LITTLE cluster
 echo "Applying settings to LITTLE Cluster..."
 echo "Quickening Boot Time"
