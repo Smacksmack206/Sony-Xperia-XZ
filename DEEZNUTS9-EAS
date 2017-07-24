@@ -200,7 +200,9 @@ chmod 666 /sys/module/snd_soc_wcd9xxx/parameters/impedance_detect_en
 echo 1 > /sys/module/snd_soc_wcd9xxx/parameters/impedance_detect_en 
 chmod 444 /sys/module/snd_soc_wcd9xxx/parameters/impedance_detect_en 
 if [ -e "/sys/module/snd_soc_wcd9330/parameters/high_perf_mode" ]; then
+chmod 644 /sys/module/snd_soc_wcd9330/parameters/high_perf_mode 
 	echo 1 > /sys/module/snd_soc_wcd9330/parameters/high_perf_mode 
+chmod 444 /sys/module/snd_soc_wcd9330/parameters/high_perf_mode 
 fi 
 echo "Applying LLYJs HI Performance DAC voltage values"
 chmod 666 /sys/module/snd_soc_wcd9335/parameters/sido_buck_svs_voltage 
