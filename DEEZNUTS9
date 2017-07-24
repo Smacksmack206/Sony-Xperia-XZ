@@ -228,10 +228,10 @@ echo '20' > /proc/sys/vm/dirty_ratio
 echo '10' > /proc/sys/vm/dirty_background_ratio
 echo '500' > /proc/sys/vm/dirty_expire_centisecs
 echo '1500' > /proc/sys/vm/dirty_writeback_centisecs
-echo "8" > /proc/sys/vm/page-cluster;
-echo "64000" > /proc/sys/kernel/msgmni;
-echo "64000" > /proc/sys/kernel/msgmax;
-echo "10" > /proc/sys/fs/lease-break-time;
+echo "8" > /proc/sys/vm/page-cluster
+echo "64000" > /proc/sys/kernel/msgmni
+echo "64000" > /proc/sys/kernel/msgmax
+echo "10" > /proc/sys/fs/lease-break-time
 echo "500,512000,64,2048" > /proc/sys/kernel/sem
 echo $((1024*1024*64)) >  /sys/block/zram0/disksize
 echo "Applying New Scrolling Values"
@@ -250,11 +250,6 @@ setprop power.saving.mode 1
 setprop ro.config.hw_power_saving 1 
 setprop ro.config.hw_power_saving true 
 setprop persist.radio.add_power_save 1
-echo "Kill GMS"
-busybox killall -9 com.google.android.gms 
-busybox killall -9 com.google.android.gms.persistent 
-busybox killall -9 com.google.process.gapps 
-busybox killall -9 com.android.vending
 echo "Enable Low Power Mode values"
 echo N > /sys/module/lpm_levels/system/pwr/cpu0/fpc-def/idle_enabled 		
 echo N > /sys/module/lpm_levels/system/pwr/cpu1/fpc-def/idle_enabled 		
@@ -272,11 +267,6 @@ echo 50 >/sys/class/devfreq/soc:qcom,memlat-cpu2/polling_interval
 echo "cpufreq" >/sys/class/devfreq/soc:qcom,mincpubw/governor 
 busybox chmod 644 /sys/module/lowmemorykiller/parameters/debug_level 
 busybox echo '0' > /sys/module/lowmemorykiller/parameters/debug_level 
-if [ -e "/sys/module/lowmemorykiller/parameters/enable_adaptive_lmk" ]; then
-chmod 666 /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
-chown root /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
-echo 1 > /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
-fi
 if [ -e "/sys/module/lowmemorykiller/parameters/enable_adaptive_lmk" ]; then
 	echo 1 > /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
 else
@@ -321,14 +311,14 @@ else
 	echo ' Your Kernel Does not support Lazyplug '
 fi
 echo "Applying High Performance Audio"
-chmod 666 /sys/module/snd_soc_wcd9xxx/parameters/impedance_detect_en 
+chmod 644 /sys/module/snd_soc_wcd9xxx/parameters/impedance_detect_en 
 echo 1 > /sys/module/snd_soc_wcd9xxx/parameters/impedance_detect_en 
 chmod 444 /sys/module/snd_soc_wcd9xxx/parameters/impedance_detect_en 
-chmod 666 /sys/module/snd_soc_wcd9330/parameters/high_perf_mode 
-echo 1 > /sys/module/snd_soc_wcd9330/parameters/high_perf_mode 
-chmod 444 /sys/module/snd_soc_wcd9330/parameters/high_perf_mode 
-echo "Applying  LLYJs HI Performance DAC voltage values"
-chmod 666 /sys/module/snd_soc_wcd9335/parameters/sido_buck_svs_voltage 
+if [ -e "/sys/module/snd_soc_wcd9330/parameters/high_perf_mode" ]; then
+	echo 1 > /sys/module/snd_soc_wcd9330/parameters/high_perf_mode 
+fi
+echo "Applying _LLYJs HI Performance DAC voltage values"
+chmod 644 /sys/module/snd_soc_wcd9335/parameters/sido_buck_svs_voltage 
 echo 965 > /sys/module/snd_soc_wcd9335/parameters/sido_buck_svs_voltage 
 chmod 444 /sys/module/snd_soc_wcd9335/parameters/sido_buck_svs_voltage
 echo "Applying FS-TRIM"
@@ -338,11 +328,43 @@ fstrim -v /cache | tee -a $FS_LOGFILE;
 fstrim -v /data | tee -a $FS_LOGFILE;
 echo "fstrim finished at $( date +"%m-%d-%Y %H:%M:%S" )" | tee -a $FS_LOGFILE;
 echo "Disabling all wakelocks for a more Nutted effect"
-echo 0 >/sys/module/wakeup/parameters/enable_msm_hsic_ws
-echo 0 >/sys/module/wakeup/parameters/enable_si_ws
-echo 0 >/sys/module/wakeup/parameters/wlan_ctrl_wake
-echo 0 >/sys/module/wakeup/parameters/wlan_rx_wake
-echo 0 >/sys/module/wakeup/parameters/wlan_wake
+echo "Disabling all wakelocks for a more Nutted effect"
+chmod 644 /sys/module/wakeup/parameters/enable_si_ws
+echo 0 > /sys/module/wakeup/parameters/enable_si_ws
+chmod 444 /sys/module/wakeup/parameters/enable_si_ws
+chmod 644 /sys/module/wakeup/parameters/enable_bluedroid_timer_ws
+echo 0 > /sys/module/wakeup/parameters/enable_bluedroid_timer_ws
+chmod 444 /sys/module/wakeup/parameters/enable_bluedroid_timer_ws
+chmod 644 /sys/module/wakeup/parameters/enable_ipa_ws
+echo 0 > /sys/module/wakeup/parameters/enable_ipa_ws
+chmod 444 /sys/module/wakeup/parameters/enable_ipa_ws
+chmod 644 /sys/module/wakeup/parameters/enable_netlink_ws
+echo 0 > /sys/module/wakeup/parameters/enable_netlink_ws
+chmod 444 /sys/module/wakeup/parameters/enable_netlink_ws
+chmod 644 /sys/module/wakeup/parameters/enable_netmgr_wl_ws
+echo 0 > /sys/module/wakeup/parameters/enable_netmgr_wl_ws
+chmod 444 /sys/module/wakeup/parameters/enable_netmgr_wl_ws
+chmod 644 /sys/module/wakeup/parameters/enable_qcom_rx_wakelock_ws
+echo 0 > /sys/module/wakeup/parameters/enable_qcom_rx_wakelock_ws
+chmod 444 /sys/module/wakeup/parameters/enable_qcom_rx_wakelock_ws
+chmod 644 /sys/module/wakeup/parameters/enable_timerfd_ws
+echo 0 > /sys/module/wakeup/parameters/enable_timerfd_ws
+chmod 444 /sys/module/wakeup/parameters/enable_timerfd_ws
+chmod 644 /sys/module/wakeup/parameters/enable_wlan_extscan_wl_ws
+echo 0 > /sys/module/wakeup/parameters/enable_wlan_extscan_wl_ws
+chmod 444 /sys/module/wakeup/parameters/enable_wlan_extscan_wl_ws
+chmod 644 /sys/module/wakeup/parameters/enable_wlan_rx_wake_ws
+echo 0 > /sys/module/wakeup/parameters/enable_wlan_rx_wake_ws
+chmod 444 /sys/module/wakeup/parameters/enable_wlan_rx_wake_ws
+chmod 644 /sys/module/wakeup/parameters/enable_wlan_wake_ws
+echo 0 > /sys/module/wakeup/parameters/enable_wlan_wake_ws
+chmod 444 /sys/module/wakeup/parameters/enable_wlan_wake_ws
+chmod 644 /sys/module/wakeup/parameters/enable_wlan_wow_wl_ws
+echo 0 > /sys/module/wakeup/parameters/enable_wlan_wow_wl_ws
+chmod 444 /sys/module/wakeup/parameters/enable_wlan_wow_wl_ws
+chmod 644 /sys/module/wakeup/parameters/enable_wlan_ws
+echo 0 > /sys/module/wakeup/parameters/enable_wlan_ws
+chmod 444 /sys/module/wakeup/parameters/enable_wlan_ws
 echo "Applying google service fix..this might take a few secs"
 #Google service drain fix
 find /data/data/*/cache/ -depth -mindepth 1 -exec rm -Rf {} \;
@@ -360,6 +382,11 @@ su -c "pm enable com.google.android.gsf/.update.SystemUpdateService"
 su -c "pm enable com.google.android.gsf/.update.SystemUpdateService$Receiver"
 su -c "pm enable com.google.android.gsf/.update.SystemUpdateService$SecretCodeReceiver"
 setprop ro.com.google.networklocation 0
+echo "Kill GMS"
+busybox killall -9 com.google.android.gms 
+busybox killall -9 com.google.android.gms.persistent 
+busybox killall -9 com.google.process.gapps 
+busybox killall -9 com.android.vending
 echo "Killing potential services"
 busybox killall -9 com.facebook.katana
 busybox killall -9 com.facebook.katana:videoplayer

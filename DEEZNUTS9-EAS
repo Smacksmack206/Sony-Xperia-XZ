@@ -52,7 +52,7 @@ echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 echo "Applying settings to LITTLE Cluster..."
 echo "Quickening Boot Time"
 setprop ro.config.hw_quickpoweron true
-#Temporarily change permissions to governor files for the LITTLE cluster to enable Interactive governor
+#Temporarily change permissions to governor files for the LITTLE cluster to enable schedutil governor
 chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 echo schedutil > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 chmod 444 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
@@ -65,7 +65,7 @@ echo 1593600 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq     #Core 0
 #Apply settings to Big cluster
 echo "Applying settings to BIG Cluster"
 sleep 0.2
-#Temporarily change permissions to governor files for the LITTLE cluster to enable Interactive governor
+#Temporarily change permissions to governor files for the LITTLE cluster to enable schedutil governor
 chmod 644 /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
 echo schedutil > /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
 chmod 444 /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
@@ -137,17 +137,12 @@ echo maple > /sys/block/mmcblk0/queue/scheduler
 echo maple >/sys/block/mmcblk1/queue/scheduler
 echo 2048 > /sys/block/mmcblk0/bdi/read_ahead_kb
 echo 2048 > /sys/block/mmcblk0rpmb/bdi/read_ahead_kb
-echo 0 >/sys/block/mmcblk0/queue/rotational 
+echo 0 > /sys/block/mmcblk0/queue/rotational 
 echo "Applying Battery Props"
 setprop power.saving.mode 1 
 setprop ro.config.hw_power_saving 1 
 setprop ro.config.hw_power_saving true 
 setprop persist.radio.add_power_save 1
-echo "Kill GMS"
-busybox killall -9 com.google.android.gms 
-busybox killall -9 com.google.android.gms.persistent 
-busybox killall -9 com.google.process.gapps 
-busybox killall -9 com.android.vending
 echo "Enable Low Power Mode values"
 echo N > /sys/module/lpm_levels/system/pwr/cpu0/fpc-def/idle_enabled 		
 echo N > /sys/module/lpm_levels/system/pwr/cpu1/fpc-def/idle_enabled 		
@@ -166,11 +161,6 @@ echo "cpufreq" >/sys/class/devfreq/soc:qcom,mincpubw/governor
 busybox chmod 644 /sys/module/lowmemorykiller/parameters/debug_level 
 busybox echo '0' > /sys/module/lowmemorykiller/parameters/debug_level 
 if [ -e "/sys/module/lowmemorykiller/parameters/enable_adaptive_lmk" ]; then
-chmod 666 /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
-chown root /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
-echo 1 > /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
-fi
-if [ -e "/sys/module/lowmemorykiller/parameters/enable_adaptive_lmk" ]; then
 	echo 1 > /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
 else
 	echo ' *Adaptive LMK is not present on your Kernel* '
@@ -184,7 +174,7 @@ echo "·TCP Values"
 string=$(</proc/sys/net/ipv4/tcp_available_congestion_control);
 if [[ $string == *"westwood"* ]]
 then
-echo westwood > /proc/sys/net/ipv4/tcp_congestion_control
+	echo westwood > /proc/sys/net/ipv4/tcp_congestion_control
 else
 	echo "Westwood not avilable, using Cubic"
 	echo cubic > /proc/sys/net/ipv4/tcp_congestion_control 
@@ -209,10 +199,10 @@ echo "Applying High Performance Audio"
 chmod 666 /sys/module/snd_soc_wcd9xxx/parameters/impedance_detect_en 
 echo 1 > /sys/module/snd_soc_wcd9xxx/parameters/impedance_detect_en 
 chmod 444 /sys/module/snd_soc_wcd9xxx/parameters/impedance_detect_en 
-chmod 666 /sys/module/snd_soc_wcd9330/parameters/high_perf_mode 
-echo 1 > /sys/module/snd_soc_wcd9330/parameters/high_perf_mode 
-chmod 444 /sys/module/snd_soc_wcd9330/parameters/high_perf_mode 
-echo "Applying  LLYJs HI Performance DAC voltage values"
+if [ -e "/sys/module/snd_soc_wcd9330/parameters/high_perf_mode" ]; then
+	echo 1 > /sys/module/snd_soc_wcd9330/parameters/high_perf_mode 
+fi 
+echo "Applying LLYJs HI Performance DAC voltage values"
 chmod 666 /sys/module/snd_soc_wcd9335/parameters/sido_buck_svs_voltage 
 echo 965 > /sys/module/snd_soc_wcd9335/parameters/sido_buck_svs_voltage 
 chmod 444 /sys/module/snd_soc_wcd9335/parameters/sido_buck_svs_voltage
@@ -239,6 +229,11 @@ su -c "pm enable com.google.android.gsf/.update.SystemUpdateService"
 su -c "pm enable com.google.android.gsf/.update.SystemUpdateService$Receiver"
 su -c "pm enable com.google.android.gsf/.update.SystemUpdateService$SecretCodeReceiver"
 setprop ro.com.google.networklocation 0
+echo "Kill GMS"
+busybox killall -9 com.google.android.gms 
+busybox killall -9 com.google.android.gms.persistent 
+busybox killall -9 com.google.process.gapps 
+busybox killall -9 com.android.vending
 echo "Killing potential services"
 busybox killall -9 com.facebook.katana
 busybox killall -9 com.facebook.katana:videoplayer
