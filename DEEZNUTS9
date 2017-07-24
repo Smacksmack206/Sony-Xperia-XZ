@@ -99,13 +99,13 @@ fi
 #Apply settings to Big cluster
 echo Applying settings to BIG Cluster
 sleep 0.2
-chmod 0777 /sys/devices/system/cpu/cpu2/core_ctl/*
+chmod 0755 /sys/devices/system/cpu/cpu2/core_ctl/*
 echo "40" > /sys/devices/system/cpu/cpu2/core_ctl/busy_up_thres
 echo "35" > /sys/devices/system/cpu/cpu2/core_ctl/busy_down_thres
 echo 1 > /sys/devices/system/cpu/cpu2/core_ctl/min_cpus
 chmod 0644 /sys/devices/system/cpu/cpu2/core_ctl/*
 sleep 0.1
-chmod 0777 /sys/devices/system/cpu/cpu2/core_ctl/*
+chmod 0755 /sys/devices/system/cpu/cpu2/core_ctl/*
 echo "0" > /sys/devices/system/cpu/cpu2/core_ctl/busy_up_thres
 echo "0" > /sys/devices/system/cpu/cpu2/core_ctl/busy_down_thres
 echo 2 > /sys/devices/system/cpu/cpu2/core_ctl/min_cpus
