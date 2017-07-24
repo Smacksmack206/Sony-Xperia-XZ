@@ -110,7 +110,7 @@ echo 0 > /sys/devices/system/cpu/cpu2/cpufreq/schedutil/down_rate_limit_us
 chmod 444 /sys/devices/system/cpu/cpu2/cpufreq/schedutil/down_rate_limit_us
 echo Applying EAS POWERHAL : VOX POPUILI
 echo 1 > /dev/voxpopuli/enable_interaction_boost
-Echo Tuning POWERHAL
+echo Tuning POWERHAL
 echo 0 > /dev/voxpopuli/fling_boost_topapp
 echo 1 > /dev/voxpopuli/fling_max_boost_duration
 echo 0 > /dev/voxpopuli/fling_min_boost_duration
