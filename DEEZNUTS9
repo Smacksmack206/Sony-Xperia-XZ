@@ -1,8 +1,12 @@
 #!/system/bin/sh
-#Copyright Cedric De'Shawn Vallieu (c) 2017, The Linux #Foundation. All rights reserved.
-#This program is free software; you can redistribute it and/or modify #it under the terms of the GNU General Public License version 2 and #only version 2 as published by the Free Software Foundation. 
-#This program is distributed in the hope that it will be useful,
-#but WITHOUT ANY WARRANTY; without even the implied warranty #of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #See the GNU General Public License for more details.
+# Copyright Cedric De'Shawn Vallieu (c) 2017, The Linux Foundation. All rights reserved.
+# This program is free software; you can redistribute it and/or modify 
+# it under the terms of the GNU General Public License version 2 and 
+# only version 2 as published by the Free Software Foundation. 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty 
+# of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+# See the GNU General Public License for more details.
 #Settings By: Smacksmack206
 #Device: Xperia XZ
 #Codename: Deeznuts
@@ -12,52 +16,52 @@
 #TWEAKS_BEGIN
 echo ""
 echo '*************************'
-echo PSA:
-echo this governor has standed the test of time
-echo can get up to 14 hrs SOT
+echo "PSA:"
+echo "this governor has standed the test of time"
+echo "can get up to 14 hrs SOT"
 echo '*************************'
-echo ------------------------------------------------------------
-echo Applying 'DEEZNUTS'
-echo Advanced Kernel Settings
-echo ------------------------------------------------------------
-echo Settings By: smacksmack206
+echo "------------------------------------------------------------"
+echo "Applying 'DEEZNUTS'"
+echo "Advanced Kernel Settings"
+echo "------------------------------------------------------------"
+echo "Settings By: smacksmack206"
 echo "Device: Xperia XZ"
-echo Codename: 'Deeznuts'
-echo Build Status: Version 9
-echo Last Updated: 7/16/2017
+echo "Codename: 'Deeznuts'"
+echo "Build Status: Version 9"
+echo "Last Updated: 7/16/2017"
 echo 
-echo ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-echo Checking Android version...
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo "Checking Android version..."
 if grep -q 'ro.build.version.sdk=25' /system/build.prop; then
-	echo Android Nougat 7.1.X detected!
+	echo "Android Nougat 7.1.X detected!"
 	sleep 0.1
-	echo N detected... Applying proper settings
+	echo "N detected... Applying proper settings"
 fi
 if grep -q 'ro.build.version.sdk=24' /system/build.prop; then
-	echo Android Nougat 7.0.X detected!
+	echo "Android Nougat 7.0.X detected!"
 	sleep 0.1
-	echo N detected... Applying proper settings
+	echo "N detected... Applying proper settings"
 fi
 if grep -q 'ro.build.version.sdk=23' /system/build.prop; then
-	echo Android Marshmallow 6.0.1 detected!
+	echo "Android Marshmallow 6.0.1 detected!"
 	sleep 0.1
-	echo MM detected... Applying proper settings
+	echo "MM detected... Applying proper settings"
 fi
 echo ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #Apply settings to LITTLE cluster
-echo Applying settings to LITTLE Cluster...
-chmod 0777 /sys/devices/system/cpu/cpu0/core_ctl/*
+echo "Applying settings to LITTLE Cluster..."
+chmod 0755 /sys/devices/system/cpu/cpu0/core_ctl/*
 echo "40" > /sys/devices/system/cpu/cpu0/core_ctl/busy_up_thres
 echo "35" > /sys/devices/system/cpu/cpu0/core_ctl/busy_down_thres
 echo 1 > /sys/devices/system/cpu/cpu0/core_ctl/min_cpus
 chmod 0644 /sys/devices/system/cpu/cpu0/core_ctl/*
 sleep 0.1
-chmod 0777 /sys/devices/system/cpu/cpu0/core_ctl/*
+chmod 0755 /sys/devices/system/cpu/cpu0/core_ctl/*
 echo "0" > /sys/devices/system/cpu/cpu0/core_ctl/busy_up_thres
 echo "0" > /sys/devices/system/cpu/cpu0/core_ctl/busy_down_thres
 echo 2 > /sys/devices/system/cpu/cpu0/core_ctl/min_cpus
 chmod 0644 /sys/devices/system/cpu/cpu0/core_ctl/*
-echo Quickening Boot Time
+echo "Quickening Boot Time"
 setprop ro.config.hw_quickpoweron true
 #Temporarily change permissions to governor files for the LITTLE cluster to enable Interactive governor
 chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
@@ -65,8 +69,8 @@ echo interactive > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 chmod 444 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 #Grab Maximum Achievable Frequency for the LITTLE Cluster
 #Temporarily change permissions to governor files for the Big cluster to set the maximum frequency to 1593MHz
-echo No LITTLE Cluster Overclocking detected. 
-echo Applying appropriate values.
+echo "No LITTLE Cluster Overclocking detected."
+echo "Applying appropriate values."
 chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
 echo 1593600 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq     #Core 0 Maximum Frequency = 1593MHz         
 chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/*
@@ -95,13 +99,13 @@ fi
 #Apply settings to Big cluster
 echo Applying settings to BIG Cluster
 sleep 0.2
-chmod 0777 /sys/devices/system/cpu/cpu2/core_ctl/*
+chmod 0755 /sys/devices/system/cpu/cpu2/core_ctl/*
 echo "40" > /sys/devices/system/cpu/cpu2/core_ctl/busy_up_thres
 echo "35" > /sys/devices/system/cpu/cpu2/core_ctl/busy_down_thres
 echo 1 > /sys/devices/system/cpu/cpu2/core_ctl/min_cpus
 chmod 0644 /sys/devices/system/cpu/cpu2/core_ctl/*
 sleep 0.1
-chmod 0777 /sys/devices/system/cpu/cpu2/core_ctl/*
+chmod 0755 /sys/devices/system/cpu/cpu2/core_ctl/*
 echo "0" > /sys/devices/system/cpu/cpu2/core_ctl/busy_up_thres
 echo "0" > /sys/devices/system/cpu/cpu2/core_ctl/busy_down_thres
 echo 2 > /sys/devices/system/cpu/cpu2/core_ctl/min_cpus
@@ -113,7 +117,7 @@ chmod 444 /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
 #Grab Maximum Achievable Frequency for the Big Cluster
 #Temporarily change permissions to governor files for the Big cluster to set the maximum frequency to 2150MHz
 echo No BIG Cluster Overclocking detected. 
-echo Applying appropriate values.
+echo "Applying appropriate values."
 chmod 644 /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq
 echo 2150400 > /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq     #Core 2 Maximum Frequency = 2150MHz         
 chmod 444 /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq
@@ -142,7 +146,7 @@ if [ -e "/sys/devices/system/cpu/cpu2/cpufreq/interactive/enable_prediction" ]; 
     echo 0 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/enable_prediction
 fi
 #Disable InputBoost
-echo Disabling InputBoost
+echo "Disabling InputBoost"
   if [ -e "/sys/module/cpu_boost/parameters/input_boost_freq" ]; then
     chmod 644 /sys/module/cpu_boost/parameters/input_boost_freq
     echo 0 > /sys/module/cpu_boost/parameters/input_boost_freq
@@ -150,7 +154,7 @@ else
     echo "*Not supported for your current Kernel*"
 fi
 #Disable TouchBoost
-echo Disabling TouchBoost
+echo "Disabling TouchBoost"
     if [ -e "/sys/module/msm_performance/parameters/touchboost" ]; then
     chmod 644 /sys/module/msm_performance/parameters/touchboost
     echo 0 > /sys/module/msm_performance/parameters/touchboost
@@ -158,12 +162,12 @@ else
     echo "*Not supported for your current Kernel*"
 fi
 #Disable BCL
-echo Disabling BCL and Removing Perfd
+echo "Disabling BCL and Removing Perfd"
 if [ -e "/sys/devices/soc/soc:qcom,bcl/mode" ]; then
 echo -n disable > /sys/devices/soc/soc:qcom,bcl/mode
 fi
 #Disable Core Control and Disable MSM Thermal Throttling allowing for longer sustained performance
-echo Disabling Aggressive CPU Thermal Throttling
+echo "Disabling Aggressive CPU Thermal Throttling"
 if [ -e "/sys/module/msm_thermal/core_control/enabled" ]; then
 echo 0 > /sys/module/msm_thermal/core_control/enabled
 fi
@@ -172,7 +176,7 @@ echo N > /sys/module/msm_thermal/parameters/enabled
 fi
 #Tweak HMP Scheduler to feed the Big cluster more tasks
 sleep 0.2
-echo Tweaking HMP Scheduler for correcting BIG Cluster utilization
+echo "Tweaking HMP Scheduler for correcting BIG Cluster utilization"
 echo 2 > /proc/sys/kernel/sched_window_stats_policy
 echo 99 > /proc/sys/kernel/sched_upmigrate
 echo 05 > /proc/sys/kernel/sched_downmigrate
@@ -215,8 +219,8 @@ if [ -e "/proc/sys/kernel/sched_boost" ]; then
 fi
 #Tweaks for other various Settings
 echo "=========================================="
-echo Tweaking other various Settings
-echo ·Memory Values
+echo "Tweaking other various Settings"
+echo "·Memory Values"
 echo '0' > /proc/sys/vm/laptop_mode
 echo '65' > /proc/sys/vm/overcommit_ratio
 echo '85' > /proc/sys/vm/vfs_cache_pressure
@@ -224,16 +228,16 @@ echo '20' > /proc/sys/vm/dirty_ratio
 echo '10' > /proc/sys/vm/dirty_background_ratio
 echo '500' > /proc/sys/vm/dirty_expire_centisecs
 echo '1500' > /proc/sys/vm/dirty_writeback_centisecs
-echo "8" > /proc/sys/vm/page-cluster;
-echo "64000" > /proc/sys/kernel/msgmni;
-echo "64000" > /proc/sys/kernel/msgmax;
-echo "10" > /proc/sys/fs/lease-break-time;
+echo "8" > /proc/sys/vm/page-cluster
+echo "64000" > /proc/sys/kernel/msgmni
+echo "64000" > /proc/sys/kernel/msgmax
+echo "10" > /proc/sys/fs/lease-break-time
 echo "500,512000,64,2048" > /proc/sys/kernel/sem
 echo $((1024*1024*64)) >  /sys/block/zram0/disksize
-echo Applying New Scrolling Values
+echo "Applying New Scrolling Values"
 setprop ro.max.fling_velocity 13500 
 setprop ro.min.fling_velocity 10000
-echo Applying I/O Scheduler
+echo "Applying I/O Scheduler"
 echo sio > /sys/block/mmcblk0/queue/scheduler
 echo sio >/sys/block/mmcblk1/queue/scheduler
 echo 2048 > /sys/block/mmcblk0/bdi/read_ahead_kb
@@ -241,25 +245,20 @@ echo 2048 > /sys/block/mmcblk0rpmb/bdi/read_ahead_kb
 echo 0 >/sys/block/mmcblk0/queue/rotational 
 echo '800' > /proc/sys/kernel/random/write_wakeup_threshold 
 echo '800' > /proc/sys/kernel/random/read_wakeup_threshold
-echo Applying Battery Props
+echo "Applying Battery Props"
 setprop power.saving.mode 1 
 setprop ro.config.hw_power_saving 1 
 setprop ro.config.hw_power_saving true 
 setprop persist.radio.add_power_save 1
-echo Kill GMS
-busybox killall -9 com.google.android.gms 
-busybox killall -9 com.google.android.gms.persistent 
-busybox killall -9 com.google.process.gapps 
-busybox killall -9 com.android.vending
-echo Enable Low Power Mode values
+echo "Enable Low Power Mode values"
 echo N > /sys/module/lpm_levels/system/pwr/cpu0/fpc-def/idle_enabled 		
 echo N > /sys/module/lpm_levels/system/pwr/cpu1/fpc-def/idle_enabled 		
 echo N > /sys/module/lpm_levels/system/perf/cpu2/fpc-def/idle_enabled 		
 echo N > /sys/module/lpm_levels/system/perf/cpu3/fpc-def/idle_enabled 
-echo Turn off L2 GDHS
+echo "Turn off L2 GDHS"
 echo 0 > /sys/module/lpm_levels/system/pwr/pwr-l2-gdhs/idle_enabled 		
 echo 0 > /sys/module/lpm_levels/system/perf/perf-l2-gdhs/idle_enabled
-echo Dynamic memory bus latency
+echo "Dynamic memory bus latency"
 echo N > /sys/module/lpm_levels/parameters/sleep_disabled
 echo "mem_latency" >/sys/class/devfreq/soc:qcom,memlat-cpu0/governor 
 echo 50 >/sys/class/devfreq/soc:qcom,memlat-cpu0/polling_interval
@@ -268,11 +267,6 @@ echo 50 >/sys/class/devfreq/soc:qcom,memlat-cpu2/polling_interval
 echo "cpufreq" >/sys/class/devfreq/soc:qcom,mincpubw/governor 
 busybox chmod 644 /sys/module/lowmemorykiller/parameters/debug_level 
 busybox echo '0' > /sys/module/lowmemorykiller/parameters/debug_level 
-if [ -e "/sys/module/lowmemorykiller/parameters/enable_adaptive_lmk" ]; then
-chmod 666 /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
-chown root /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
-echo 1 > /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
-fi
 if [ -e "/sys/module/lowmemorykiller/parameters/enable_adaptive_lmk" ]; then
 	echo 1 > /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
 else
@@ -283,19 +277,19 @@ if [ -e "/sys/module/lowmemorykiller/parameters/minfree" ]; then
 else
 	echo ' *LMK cannot currently be modified on your Kernel* '
 fi
-echo ·TCP Values
+echo "·TCP Values"
 string=$(</proc/sys/net/ipv4/tcp_available_congestion_control);
 if [[ $string == *"westwood"* ]]
 then
 echo westwood > /proc/sys/net/ipv4/tcp_congestion_control
 else
-	echo Westwood not avilable, using Cubic
+	echo "Westwood not avilable, using Cubic"
 	echo cubic > /proc/sys/net/ipv4/tcp_congestion_control 
 fi
-echo Disabling Fast Dormancy
+echo "Disabling Fast Dormancy"
 setprop ro.fast.dormancy 0
 setprop ro.ril.fast.dormancy.rule 0
-echo Edit Wifi Sleeper
+echo "Edit Wifi Sleeper"
 sqlite=/system/xbin/sqlite3 wifi_idle_wait=30000 
 if [ -e "/sys/module/adreno_idler" ]; then
 	echo 'Y' > /sys/module/adreno_idler/parameters/adreno_idler_active
@@ -305,7 +299,7 @@ else
 fi
 #Tweaking GPU
 sleep 0.1
-echo GPU Tweaking
+echo "GPU Tweaking"
 echo msm-adreno-tz > /sys/devices/soc/b00000.qcom,kgsl-3d0/devfreq/b00000.qcom,kgsl-3d0/governor
 echo 624000000 > /sys/devices/soc/b00000.qcom,kgsl-3d0/devfreq/b00000.qcom,kgsl-3d0/max_freq
 #Tune Lazyplug	
@@ -316,30 +310,62 @@ if [ -e "/sys/module/lazyplug" ]; then
 else
 	echo ' Your Kernel Does not support Lazyplug '
 fi
-echo Applying High Performance Audio 
-chmod 666 /sys/module/snd_soc_wcd9xxx/parameters/impedance_detect_en 
+echo "Applying High Performance Audio"
+chmod 644 /sys/module/snd_soc_wcd9xxx/parameters/impedance_detect_en 
 echo 1 > /sys/module/snd_soc_wcd9xxx/parameters/impedance_detect_en 
 chmod 444 /sys/module/snd_soc_wcd9xxx/parameters/impedance_detect_en 
-chmod 666 /sys/module/snd_soc_wcd9330/parameters/high_perf_mode 
-echo 1 > /sys/module/snd_soc_wcd9330/parameters/high_perf_mode 
-chmod 444 /sys/module/snd_soc_wcd9330/parameters/high_perf_mode 
-echo Applying  LLYJs HI Performance DAC voltage values
-chmod 666 /sys/module/snd_soc_wcd9335/parameters/sido_buck_svs_voltage 
+if [ -e "/sys/module/snd_soc_wcd9330/parameters/high_perf_mode" ]; then
+	echo 1 > /sys/module/snd_soc_wcd9330/parameters/high_perf_mode 
+fi
+echo "Applying _LLYJs HI Performance DAC voltage values"
+chmod 644 /sys/module/snd_soc_wcd9335/parameters/sido_buck_svs_voltage 
 echo 965 > /sys/module/snd_soc_wcd9335/parameters/sido_buck_svs_voltage 
 chmod 444 /sys/module/snd_soc_wcd9335/parameters/sido_buck_svs_voltage
-echo Applying FS-TRIM
+echo "Applying FS-TRIM"
 FS_LOGFILE=/data/fstrim.log
 echo "fstrim started at $( date +"%m-%d-%Y %H:%M:%S" )" | tee -a $FS_LOGFILE;
 fstrim -v /cache | tee -a $FS_LOGFILE;
 fstrim -v /data | tee -a $FS_LOGFILE;
 echo "fstrim finished at $( date +"%m-%d-%Y %H:%M:%S" )" | tee -a $FS_LOGFILE;
-echo Disabling all wakelocks for a more Nutted effect
-echo 0 >/sys/module/wakeup/parameters/enable_msm_hsic_ws
-echo 0 >/sys/module/wakeup/parameters/enable_si_ws
-echo 0 >/sys/module/wakeup/parameters/wlan_ctrl_wake
-echo 0 >/sys/module/wakeup/parameters/wlan_rx_wake
-echo 0 >/sys/module/wakeup/parameters/wlan_wake
-echo Applying google service fix..this might take a few secs
+echo "Disabling all wakelocks for a more Nutted effect"
+echo "Disabling all wakelocks for a more Nutted effect"
+chmod 644 /sys/module/wakeup/parameters/enable_si_ws
+echo 0 > /sys/module/wakeup/parameters/enable_si_ws
+chmod 444 /sys/module/wakeup/parameters/enable_si_ws
+chmod 644 /sys/module/wakeup/parameters/enable_bluedroid_timer_ws
+echo 0 > /sys/module/wakeup/parameters/enable_bluedroid_timer_ws
+chmod 444 /sys/module/wakeup/parameters/enable_bluedroid_timer_ws
+chmod 644 /sys/module/wakeup/parameters/enable_ipa_ws
+echo 0 > /sys/module/wakeup/parameters/enable_ipa_ws
+chmod 444 /sys/module/wakeup/parameters/enable_ipa_ws
+chmod 644 /sys/module/wakeup/parameters/enable_netlink_ws
+echo 0 > /sys/module/wakeup/parameters/enable_netlink_ws
+chmod 444 /sys/module/wakeup/parameters/enable_netlink_ws
+chmod 644 /sys/module/wakeup/parameters/enable_netmgr_wl_ws
+echo 0 > /sys/module/wakeup/parameters/enable_netmgr_wl_ws
+chmod 444 /sys/module/wakeup/parameters/enable_netmgr_wl_ws
+chmod 644 /sys/module/wakeup/parameters/enable_qcom_rx_wakelock_ws
+echo 0 > /sys/module/wakeup/parameters/enable_qcom_rx_wakelock_ws
+chmod 444 /sys/module/wakeup/parameters/enable_qcom_rx_wakelock_ws
+chmod 644 /sys/module/wakeup/parameters/enable_timerfd_ws
+echo 0 > /sys/module/wakeup/parameters/enable_timerfd_ws
+chmod 444 /sys/module/wakeup/parameters/enable_timerfd_ws
+chmod 644 /sys/module/wakeup/parameters/enable_wlan_extscan_wl_ws
+echo 0 > /sys/module/wakeup/parameters/enable_wlan_extscan_wl_ws
+chmod 444 /sys/module/wakeup/parameters/enable_wlan_extscan_wl_ws
+chmod 644 /sys/module/wakeup/parameters/enable_wlan_rx_wake_ws
+echo 0 > /sys/module/wakeup/parameters/enable_wlan_rx_wake_ws
+chmod 444 /sys/module/wakeup/parameters/enable_wlan_rx_wake_ws
+chmod 644 /sys/module/wakeup/parameters/enable_wlan_wake_ws
+echo 0 > /sys/module/wakeup/parameters/enable_wlan_wake_ws
+chmod 444 /sys/module/wakeup/parameters/enable_wlan_wake_ws
+chmod 644 /sys/module/wakeup/parameters/enable_wlan_wow_wl_ws
+echo 0 > /sys/module/wakeup/parameters/enable_wlan_wow_wl_ws
+chmod 444 /sys/module/wakeup/parameters/enable_wlan_wow_wl_ws
+chmod 644 /sys/module/wakeup/parameters/enable_wlan_ws
+echo 0 > /sys/module/wakeup/parameters/enable_wlan_ws
+chmod 444 /sys/module/wakeup/parameters/enable_wlan_ws
+echo "Applying google service fix..this might take a few secs"
 #Google service drain fix
 find /data/data/*/cache/ -depth -mindepth 1 -exec rm -Rf {} \;
 find /data/data/*/*/cache/ -depth -mindepth 1 -exec rm -Rf {} \;
@@ -356,7 +382,12 @@ su -c "pm enable com.google.android.gsf/.update.SystemUpdateService"
 su -c "pm enable com.google.android.gsf/.update.SystemUpdateService$Receiver"
 su -c "pm enable com.google.android.gsf/.update.SystemUpdateService$SecretCodeReceiver"
 setprop ro.com.google.networklocation 0
-echo Killing potential services
+echo "Kill GMS"
+busybox killall -9 com.google.android.gms 
+busybox killall -9 com.google.android.gms.persistent 
+busybox killall -9 com.google.process.gapps 
+busybox killall -9 com.android.vending
+echo "Killing potential services"
 busybox killall -9 com.facebook.katana
 busybox killall -9 com.facebook.katana:videoplayer
 busybox killall -9 com.facebook.katana:notification
@@ -368,12 +399,12 @@ busybox killall -9 com.sonymobile.intellegent.backlight
 busybox killall -9 com.sonymobile.intellegent.iengine
 busybox killall -9 com.sonyericsson.lockscreen.uxpnxt
 busybox killall -9 org.telegram.messenger
-echo ------------------------------------------------------------
-echo 'DEEZNUTS' Successfully Applied!
+echo "------------------------------------------------------------"
+echo "'DEEZNUTS' Successfully Applied!"
 echo "DEEZNUTS" > /data/system/current_profile
-echo   You may now tweak them further
-echo    using EXKM or Kernel Adiutor
-echo ------------------------------------------------------------
+echo "You may now tweak them further"
+echo "using EXKM or Kernel Adiutor"
+echo "------------------------------------------------------------"
 echo ""
 echo " Done, this will be automatically closed..."
 #################################################
