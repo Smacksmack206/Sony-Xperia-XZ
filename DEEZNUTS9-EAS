@@ -89,17 +89,18 @@ fi
 if [ -e "/sys/module/msm_thermal/parameters/enabled" ]; then
 echo N > /sys/module/msm_thermal/parameters/enabled
 fi
-echo "Tuning Energy Aware Scheduler"
-echo -100 > /dev/stune/schedtune.boost
-echo -100 > /dev/stune/system-background/schedtune.boost
+echo Tuning Energy Aware Scheduler 
+echo -60 > /dev/stune/schedtune.boost
+echo 0 > /dev/stune/foreground/schedtune.boost
+echo -100 > /dev/stune/background/schedtune.boost
+echo 0 > /dev/stune/system-background/schedtune.boost
+echo 0 > /dev/stune/top-app/schedtune.boost
 chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/schedutil/iowait_boost_enable
 echo 1 > /sys/devices/system/cpu/cpu0/cpufreq/schedutil/iowait_boost_enable
 chmod 444 /sys/devices/system/cpu/cpu0/cpufreq/schedutil/iowait_boost_enable
 chmod 644 /sys/devices/system/cpu/cpu2/cpufreq/schedutil/iowait_boost_enable
 echo 1 > /sys/devices/system/cpu/cpu2/cpufreq/schedutil/iowait_boost_enable
 chmod 444 /sys/devices/system/cpu/cpu0/cpufreq/schedutil/iowait_boost_enable
-echo 2 > /proc/sys/kernel/sched_tunable_scaling
-echo 38 > /proc/sys/kernel/sched_walt_cpu_high_irqload
 chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/schedutil/up_rate_limit_us
 echo 1000 > /sys/devices/system/cpu/cpu0/cpufreq/schedutil/up_rate_limit_us
 chmod 444 /sys/devices/system/cpu/cpu0/cpufreq/schedutil/up_rate_limit_us
@@ -128,7 +129,6 @@ echo 307 > /dev/voxpopuli/touch_min_freq_little
 echo "=========================================="
 echo "Tweaking other various Settings"
 echo "·Memory Values"
-echo $((1024*1024*64)) >  /sys/block/zram0/disksize
 echo "Applying New Scrolling Values"
 setprop ro.max.fling_velocity 13800 
 setprop ro.min.fling_velocity 10500
