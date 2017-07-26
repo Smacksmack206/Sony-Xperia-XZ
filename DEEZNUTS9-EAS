@@ -90,11 +90,11 @@ if [ -e "/sys/module/msm_thermal/parameters/enabled" ]; then
 echo N > /sys/module/msm_thermal/parameters/enabled
 fi
 echo Tuning Energy Aware Scheduler 
-echo -60 > /dev/stune/schedtune.boost
-echo 0 > /dev/stune/foreground/schedtune.boost
+echo -80 > /dev/stune/schedtune.boost
+echo 2 > /dev/stune/foreground/schedtune.boost
 echo -100 > /dev/stune/background/schedtune.boost
 echo 0 > /dev/stune/system-background/schedtune.boost
-echo 0 > /dev/stune/top-app/schedtune.boost
+echo 7 > /dev/stune/top-app/schedtune.boost
 chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/schedutil/iowait_boost_enable
 echo 1 > /sys/devices/system/cpu/cpu0/cpufreq/schedutil/iowait_boost_enable
 chmod 444 /sys/devices/system/cpu/cpu0/cpufreq/schedutil/iowait_boost_enable
@@ -105,26 +105,26 @@ chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/schedutil/up_rate_limit_us
 echo 1000 > /sys/devices/system/cpu/cpu0/cpufreq/schedutil/up_rate_limit_us
 chmod 444 /sys/devices/system/cpu/cpu0/cpufreq/schedutil/up_rate_limit_us
 chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/schedutil/down_rate_limit_us
-echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/schedutil/down_rate_limit_us
+echo 1000 > /sys/devices/system/cpu/cpu0/cpufreq/schedutil/down_rate_limit_us
 chmod 444 /sys/devices/system/cpu/cpu0/cpufreq/schedutil/down_rate_limit_us
 chmod 644 /sys/devices/system/cpu/cpu2/cpufreq/schedutil/up_rate_limit_us
 echo 1000 > /sys/devices/system/cpu/cpu2/cpufreq/schedutil/up_rate_limit_us
 chmod 444 /sys/devices/system/cpu/cpu2/cpufreq/schedutil/up_rate_limit_us
 chmod 644 /sys/devices/system/cpu/cpu2/cpufreq/schedutil/down_rate_limit_us
-echo 0 > /sys/devices/system/cpu/cpu2/cpufreq/schedutil/down_rate_limit_us
+echo 1000 > /sys/devices/system/cpu/cpu2/cpufreq/schedutil/down_rate_limit_us
 chmod 444 /sys/devices/system/cpu/cpu2/cpufreq/schedutil/down_rate_limit_us
 echo "Applying EAS POWERHAL : VOX POPUILI"
 echo 1 > /dev/voxpopuli/enable_interaction_boost
 echo "Tuning POWERHAL"
 echo 0 > /dev/voxpopuli/fling_boost_topapp
-echo 1 > /dev/voxpopuli/fling_max_boost_duration
-echo 0 > /dev/voxpopuli/fling_min_boost_duration
-echo 307 > /dev/voxpopuli/fling_min_freq_big
-echo 307 > /dev/voxpopuli/fling_min_freq_little
-echo 0 > /dev/voxpopuli/touch_boost_duration
+echo 1300 > /dev/voxpopuli/fling_max_boost_duration
+echo 1300 > /dev/voxpopuli/fling_min_boost_duration
+echo 403 > /dev/voxpopuli/fling_min_freq_big
+echo 422 > /dev/voxpopuli/fling_min_freq_little
+echo 3000 > /dev/voxpopuli/touch_boost_duration
 echo 0 > /dev/voxpopuli/touch_boost_topapp
-echo 307 > /dev/voxpopuli/touch_min_freq_big
-echo 307 > /dev/voxpopuli/touch_min_freq_little
+echo 403 > /dev/voxpopuli/touch_min_freq_big
+echo 422 > /dev/voxpopuli/touch_min_freq_little
 #Tweaks for other various Settings
 echo "=========================================="
 echo "Tweaking other various Settings"
@@ -183,7 +183,7 @@ echo "Disabling Fast Dormancy"
 setprop ro.fast.dormancy 0
 setprop ro.ril.fast.dormancy.rule 0
 echo "Edit Wifi Sleeper"
-sqlite=/system/xbin/sqlite3 wifi_idle_wait=30000 
+sqlite=/system/xbin/sqlite3 wifi_idle_wait=35000 
 if [ -e "/sys/module/adreno_idler" ]; then
 	echo 'Y' > /sys/module/adreno_idler/parameters/adreno_idler_active
 	echo'10000' > /sys/module/adreno_idler/parameters/adreno_idler_idleworkload
@@ -214,28 +214,7 @@ echo "fstrim started at $( date +"%m-%d-%Y %H:%M:%S" )" | tee -a $FS_LOGFILE;
 fstrim -v /cache | tee -a $FS_LOGFILE;
 fstrim -v /data | tee -a $FS_LOGFILE;
 echo "fstrim finished at $( date +"%m-%d-%Y %H:%M:%S" )" | tee -a $FS_LOGFILE;
-echo "Applying google service fix..this might take a few secs"
-#Google service drain fix
-find /data/data/*/cache/ -depth -mindepth 1 -exec rm -Rf {} \;
-find /data/data/*/*/cache/ -depth -mindepth 1 -exec rm -Rf {} \;
-find /data/data/*/*/*/*/cache/ -depth -mindepth 1 -exec rm -Rf {} \;
-rm -Rf /data/data/com.facebook.katana/files/video-cache/*
-su -c "pm enable com.google.android.gms/.update.SystemUpdateActivity"
-su -c "pm enable com.google.android.gms/.update.SystemUpdateService"
-su -c "pm enable com.google.android.gms/.update.SystemUpdateService$ActiveReceiver"
-su -c "pm enable com.google.android.gms/.update.SystemUpdateService$Receiver"
-su -c "pm enable com.google.android.gms/.update.SystemUpdateService$SecretCodeReceiver"
-su -c "pm enable com.google.android.gsf/.update.SystemUpdateActivity"
-su -c "pm enable com.google.android.gsf/.update.SystemUpdatePanoActivity"
-su -c "pm enable com.google.android.gsf/.update.SystemUpdateService"
-su -c "pm enable com.google.android.gsf/.update.SystemUpdateService$Receiver"
-su -c "pm enable com.google.android.gsf/.update.SystemUpdateService$SecretCodeReceiver"
-setprop ro.com.google.networklocation 0
-echo "Kill GMS"
-busybox killall -9 com.google.android.gms 
-busybox killall -9 com.google.android.gms.persistent 
-busybox killall -9 com.google.process.gapps 
-busybox killall -9 com.android.vending
+
 echo "Killing potential services"
 busybox killall -9 com.facebook.katana
 busybox killall -9 com.facebook.katana:videoplayer
