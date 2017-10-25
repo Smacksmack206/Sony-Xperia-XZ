@@ -46,17 +46,6 @@ fi
 echo ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #Apply settings to LITTLE cluster
 echo Applying settings to LITTLE Cluster...
-chmod 0777 /sys/devices/system/cpu/cpu0/core_ctl/*
-echo "40" > /sys/devices/system/cpu/cpu0/core_ctl/busy_up_thres
-echo "35" > /sys/devices/system/cpu/cpu0/core_ctl/busy_down_thres
-echo 1 > /sys/devices/system/cpu/cpu0/core_ctl/min_cpus
-chmod 0644 /sys/devices/system/cpu/cpu0/core_ctl/*
-sleep 0.1
-chmod 0777 /sys/devices/system/cpu/cpu0/core_ctl/*
-echo "0" > /sys/devices/system/cpu/cpu0/core_ctl/busy_up_thres
-echo "0" > /sys/devices/system/cpu/cpu0/core_ctl/busy_down_thres
-echo 2 > /sys/devices/system/cpu/cpu0/core_ctl/min_cpus
-chmod 0644 /sys/devices/system/cpu/cpu0/core_ctl/*
 echo Quickening Boot Time
 setprop ro.config.hw_quickpoweron true
 #Temporarily change permissions to governor files for the LITTLE cluster to enable alucard governor
@@ -77,18 +66,7 @@ echo 1728000 > /sys/devices/system/cpu/cpu2/cpufreq/alucard/freq_responsiveness_
 
 #Apply settings to Big cluster
 echo Applying settings to BIG Cluster
-sleep 0.2
-chmod 0777 /sys/devices/system/cpu/cpu2/core_ctl/*
-echo "40" > /sys/devices/system/cpu/cpu2/core_ctl/busy_up_thres
-echo "35" > /sys/devices/system/cpu/cpu2/core_ctl/busy_down_thres
-echo 1 > /sys/devices/system/cpu/cpu2/core_ctl/min_cpus
-chmod 0644 /sys/devices/system/cpu/cpu2/core_ctl/*
-sleep 0.1
-chmod 0777 /sys/devices/system/cpu/cpu2/core_ctl/*
-echo "0" > /sys/devices/system/cpu/cpu2/core_ctl/busy_up_thres
-echo "0" > /sys/devices/system/cpu/cpu2/core_ctl/busy_down_thres
-echo 2 > /sys/devices/system/cpu/cpu2/core_ctl/min_cpus
-chmod 0644 /sys/devices/system/cpu/cpu2/core_ctl/*
+
 #Temporarily change permissions to governor files for the LITTLE cluster to enable alucard governor
 chmod 644 /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
 echo alucard > /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
@@ -131,7 +109,7 @@ fi
 #Disable Core Control and Disable MSM Thermal Throttling allowing for longer sustained performance
 echo Disabling Aggressive CPU Thermal Throttling
 if [ -e "/sys/module/msm_thermal/core_control/enabled" ]; then
-echo 0 > /sys/module/msm_thermal/core_control/enabled
+echo 1 > /sys/module/msm_thermal/core_control/enabled
 fi
 if [ -e "/sys/module/msm_thermal/parameters/enabled" ]; then
 echo N > /sys/module/msm_thermal/parameters/enabled
@@ -190,11 +168,7 @@ echo '20' > /proc/sys/vm/dirty_ratio
 echo '10' > /proc/sys/vm/dirty_background_ratio
 echo '500' > /proc/sys/vm/dirty_expire_centisecs
 echo '1500' > /proc/sys/vm/dirty_writeback_centisecs
-echo "8" > /proc/sys/vm/page-cluster;
-echo "64000" > /proc/sys/kernel/msgmni;
-echo "64000" > /proc/sys/kernel/msgmax;
-echo "10" > /proc/sys/fs/lease-break-time;
-echo "500,512000,64,2048" > /proc/sys/kernel/sem
+echo "8" > /proc/sys/vm/page-cluster
 echo $((1024*1024*64)) >  /sys/block/zram0/disksize
 echo Applying New Scrolling Values
 setprop ro.max.fling_velocity 13500 
@@ -212,11 +186,6 @@ setprop power.saving.mode 1
 setprop ro.config.hw_power_saving 1 
 setprop ro.config.hw_power_saving true 
 setprop persist.radio.add_power_save 1
-echo Kill GMS
-busybox killall -9 com.google.android.gms 
-busybox killall -9 com.google.android.gms.persistent 
-busybox killall -9 com.google.process.gapps 
-busybox killall -9 com.android.vending
 echo Enable Low Power Mode values
 echo N > /sys/module/lpm_levels/system/pwr/cpu0/fpc-def/idle_enabled 		
 echo N > /sys/module/lpm_levels/system/pwr/cpu1/fpc-def/idle_enabled 		
@@ -299,41 +268,6 @@ echo "fstrim started at $( date +"%m-%d-%Y %H:%M:%S" )" | tee -a $FS_LOGFILE;
 fstrim -v /cache | tee -a $FS_LOGFILE;
 fstrim -v /data | tee -a $FS_LOGFILE;
 echo "fstrim finished at $( date +"%m-%d-%Y %H:%M:%S" )" | tee -a $FS_LOGFILE;
-echo Disabling all wakelocks for a more Nutted effect
-echo 0 >/sys/module/wakeup/parameters/enable_msm_hsic_ws
-echo 0 >/sys/module/wakeup/parameters/enable_si_ws
-echo 0 >/sys/module/wakeup/parameters/wlan_ctrl_wake
-echo 0 >/sys/module/wakeup/parameters/wlan_rx_wake
-echo 0 >/sys/module/wakeup/parameters/wlan_wake
-echo Applying google service fix..this might take a few secs
-#Google service drain fix
-find /data/data/*/cache/ -depth -mindepth 1 -exec rm -Rf {} \;
-find /data/data/*/*/cache/ -depth -mindepth 1 -exec rm -Rf {} \;
-find /data/data/*/*/*/*/cache/ -depth -mindepth 1 -exec rm -Rf {} \;
-rm -Rf /data/data/com.facebook.katana/files/video-cache/*
-su -c "pm enable com.google.android.gms/.update.SystemUpdateActivity"
-su -c "pm enable com.google.android.gms/.update.SystemUpdateService"
-su -c "pm enable com.google.android.gms/.update.SystemUpdateService$ActiveReceiver"
-su -c "pm enable com.google.android.gms/.update.SystemUpdateService$Receiver"
-su -c "pm enable com.google.android.gms/.update.SystemUpdateService$SecretCodeReceiver"
-su -c "pm enable com.google.android.gsf/.update.SystemUpdateActivity"
-su -c "pm enable com.google.android.gsf/.update.SystemUpdatePanoActivity"
-su -c "pm enable com.google.android.gsf/.update.SystemUpdateService"
-su -c "pm enable com.google.android.gsf/.update.SystemUpdateService$Receiver"
-su -c "pm enable com.google.android.gsf/.update.SystemUpdateService$SecretCodeReceiver"
-setprop ro.com.google.networklocation 0
-echo Killing potential services
-busybox killall -9 com.facebook.katana
-busybox killall -9 com.facebook.katana:videoplayer
-busybox killall -9 com.facebook.katana:notification
-busybox killall -9 com.sonymobile.deviceusage
-busybox killall -9 com.qualcomm.qcrilmsgtunnel
-busybox killall -9 com.simalliance.openmobileapi.service
-busybox killall -9 com.sonymobile.ree
-busybox killall -9 com.sonymobile.intellegent.backlight
-busybox killall -9 com.sonymobile.intellegent.iengine
-busybox killall -9 com.sonyericsson.lockscreen.uxpnxt
-busybox killall -9 org.telegram.messenger
 echo ------------------------------------------------------------
 echo 'DEEZNUTS' Successfully Applied!
 echo "DEEZNUTS" > /data/system/current_profile
