@@ -16,7 +16,7 @@ echo PSA:
 echo this governor is special
 echo redesigned with new features
 echo this redesign however is speed over battery
-echo impressively responsive 
+echo impressively responsive using Electron governor 
 echo '*************************'
 echo ------------------------------------------------------------
 echo Applying 'DEEZNUTS'
@@ -26,7 +26,7 @@ echo Settings By: smacksmack206
 echo "Device: Xperia XZ"
 echo Codename: 'Deeznuts'
 echo Build Status: Version EX²
-echo Last Updated: 9/28/2017
+echo Last Updated: 10/27/2017
 echo ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 echo Checking Android version...
 if grep -q 'ro.build.version.sdk=25' /system/build.prop; then
