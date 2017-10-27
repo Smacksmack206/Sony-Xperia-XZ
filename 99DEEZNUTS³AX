@@ -13,8 +13,7 @@
 echo ""
 echo '*************************'
 echo PSA:
-echo this governor has standed the test of time
-echo can get up to 14 hrs SOT
+echo This is a new build tweaked speed over battery using Alucard
 echo '*************************'
 echo ------------------------------------------------------------
 echo Applying 'DEEZNUTS'
@@ -23,8 +22,8 @@ echo ------------------------------------------------------------
 echo Settings By: smacksmack206
 echo "Device: Xperia XZ"
 echo Codename: 'Deeznuts'
-echo Build Status: Version 8
-echo Last Updated: 7/1/2017
+#Build Status: Experimental
+#Last Updated: 10/27/2017
 echo 
 echo ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 echo Checking Android version...
