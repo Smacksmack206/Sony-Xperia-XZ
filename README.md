@@ -7,3 +7,5 @@ branch containing files related to XZ development
 *WDFconfig enables use of screen mirroring and miracasting on nougat devices as this was broken from source, i fixed it also need to push adb commands to fully activate the feature again to work entirely.
 
 *Thermal Config contains a modded thermal setting for throttling under specified operation thresholds and temps. should allow higher performance from less throttling, but be careful as some kernels can cause the phone to overheat and others will lower temp using this config.
+
+*mixer_paths_tasha is a custom audio file for XZ development. this has increased volume output safely without taking the values too far and causing damage to speakers.
